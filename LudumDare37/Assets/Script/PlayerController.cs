@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D rBody;
     private bool CanMove = true;
 
+    public bool isHooked = false;
+    public Transform hook = null;
+
     // Use this for initialization
     void Start () {
         rBody = GetComponent<Rigidbody2D>();
@@ -22,13 +25,28 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if(CanMove)
+        if (isHooked)
+        {
+            if(hook != null)
+            {
+                rBody.velocity = new Vector2(0, 0);
+                transform.position = hook.position;
+            }
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                rBody.velocity = new Vector2(rBody.velocity.x, j_force);
+
+                IsGround = false;
+                isHooked = false;
+                hook = null;
+            }
+        }
+        else if (CanMove)
         {
             float move = Input.GetAxisRaw("Horizontal");
             rBody.velocity = new Vector2(move * m_speed, rBody.velocity.y);
         }
-
-        
 
         if (IsGround)
         {

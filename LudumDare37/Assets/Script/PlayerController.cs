@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour {
 
         if (isHooked)
         {
+            print("isHooked");
             if(hook != null)
             {
                 rBody.velocity = new Vector2(0, 0);

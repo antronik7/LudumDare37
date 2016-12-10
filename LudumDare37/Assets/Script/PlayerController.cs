@@ -16,13 +16,14 @@ public class PlayerController : MonoBehaviour {
     public bool isHooked = false;
     public Transform hook = null;
 
-    // Use this for initialization
+	private float baseGravityScale;
+
     void Start () {
         rBody = GetComponent<Rigidbody2D>();
+		baseGravityScale = rBody.gravityScale;
         boxCollider = GetComponent<BoxCollider2D>();
     }
-	
-	// Update is called once per frame
+
 	void Update () {
 
         if (isHooked)
@@ -87,7 +88,7 @@ public class PlayerController : MonoBehaviour {
 
     public void resetPhysic()
     {
-        rBody.gravityScale = 10;
+		rBody.gravityScale = baseGravityScale;
         rBody.velocity = new Vector2(0, 0);
         CanMove = true;
     }

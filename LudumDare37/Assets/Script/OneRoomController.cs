@@ -4,12 +4,8 @@ using System.Collections;
 public class OneRoomController : MonoBehaviour {
 
     public float speed;
-<<<<<<< HEAD
     private GameObject player;
-=======
     public float speedRotation;
-    public GameObject player;
->>>>>>> 810edac4480a855840c9b76feb38d98ab7fe9ef1
     public GameObject spawn;
 
     Vector3 offset;

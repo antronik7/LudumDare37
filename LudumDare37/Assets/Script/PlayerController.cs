@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-    public GameObject OneRoom;
+    private GameObject OneRoom;
 
     public float m_speed;
     public float j_force;
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour {
         rBody = GetComponent<Rigidbody2D>();
 		baseGravityScale = rBody.gravityScale;
         boxCollider = GetComponent<BoxCollider2D>();
+		OneRoom = GameObject.FindGameObjectWithTag ("Room");
     }
 
 	void Update () {

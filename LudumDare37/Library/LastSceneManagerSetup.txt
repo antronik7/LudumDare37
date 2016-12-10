@@ -1,12 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/mainHugo.unity
-=======
-<<<<<<< HEAD
-- path: Assets/Scenes/mainAntoine.unity
-=======
 - path: Assets/Scenes/levelExemple.unity
->>>>>>> f79a5a143ae2add722d561f112a15cece5a6cccf
->>>>>>> dbc29d7ffaa83f2ff2427016cc3d85e9ab63b27d
   isLoaded: 1
   isActive: 1

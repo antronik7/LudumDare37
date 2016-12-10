@@ -119,6 +119,7 @@ public class OneRoomController : MonoBehaviour {
 
     public void OneRoomTranslation(Vector3 position)
     {
+        Rewinder.addTranslation(position, gameObject.transform.position);
         target = position + offset;
 
         DoTranslation = true;
@@ -151,5 +152,36 @@ public class OneRoomController : MonoBehaviour {
     public float getInitialDistanceBetweenPlayerSpawn()
     {
         return transitionInitialDistancePlayerSpawn;
+    }
+
+    public void moveTo(Vector3 roomPosition)
+    {
+        gameObject.transform.position = roomPosition;
+    }
+
+    private static OneRoomController s_Instance = null;
+
+    // This defines a static instance property that attempts to find the manager object in the scene and
+    // returns it to the caller.
+    public static OneRoomController instance
+    {
+        get
+        {
+            if (s_Instance == null)
+            {
+                // This is where the magic happens.
+                //  FindObjectOfType(...) returns the first AManager object in the scene.
+                s_Instance = FindObjectOfType(typeof(OneRoomController)) as OneRoomController;
+            }
+
+            // If it is still null, create a new instance
+            if (s_Instance == null)
+            {
+                GameObject obj = new GameObject("OneRoom");
+                s_Instance = obj.AddComponent(typeof(OneRoomController)) as OneRoomController;
+            }
+
+            return s_Instance;
+        }
     }
 }

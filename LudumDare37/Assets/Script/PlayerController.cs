@@ -40,4 +40,5 @@ public class PlayerController : MonoBehaviour {
             OneRoom.GetComponent<OneRoomController>().OneRoomTranslation(transform.position);
         }
     }
+    
 }

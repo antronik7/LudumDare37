@@ -72,5 +72,9 @@ public class PlayerController : MonoBehaviour {
         rBody.velocity = new Vector2(0, 0);
         CanMove = true;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> f79a5a143ae2add722d561f112a15cece5a6cccf
 }

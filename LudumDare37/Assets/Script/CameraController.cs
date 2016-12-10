@@ -22,10 +22,10 @@ public class CameraController : MonoBehaviour
         if (roomController.getIsTranslating())
         {
             if (roomController.getDistanceBetweenPlayerSpawner() > (roomController.getInitialDistanceBetweenPlayerSpawn() / 2))
-                GetComponent<Camera>().orthographicSize += 0.05f;
+                GetComponent<Camera>().orthographicSize += 0.02f;
             else
             {
-                GetComponent<Camera>().orthographicSize -= 0.05f;
+                GetComponent<Camera>().orthographicSize -= 0.02f;
             }
 
         }

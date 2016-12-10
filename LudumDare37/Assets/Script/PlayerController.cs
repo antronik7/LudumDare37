@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
     public BoxCollider2D boxCollider;
 
     private Rigidbody2D rBody;
-    
+    private bool CanMove = true;
 
     // Use this for initialization
     void Start () {
@@ -21,8 +21,14 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        float move = Input.GetAxisRaw("Horizontal");
-        rBody.velocity = new Vector2(move * m_speed, rBody.velocity.y);
+
+        if(CanMove)
+        {
+            float move = Input.GetAxisRaw("Horizontal");
+            rBody.velocity = new Vector2(move * m_speed, rBody.velocity.y);
+        }
+
+        
 
         if (IsGround)
         {
@@ -39,5 +45,32 @@ public class PlayerController : MonoBehaviour {
             boxCollider.enabled = false;
             OneRoom.GetComponent<OneRoomController>().OneRoomTranslation(transform.position);
         }
+
+        if (Input.GetButtonDown("Fire2"))
+        {
+            OneRoom.GetComponent<OneRoomController>().OneRoomRotation(1);
+
+            boxCollider.enabled = false;
+            rBody.gravityScale = 0;
+            rBody.velocity = new Vector2(0, 0);
+            CanMove = false;
+        }
+
+        if (Input.GetButtonDown("Fire3"))
+        {
+            OneRoom.GetComponent<OneRoomController>().OneRoomRotation(-1);
+
+            rBody.gravityScale = 0;
+            rBody.velocity = new Vector2(0, 0);
+            CanMove = false;
+        }
     }
+
+    public void resetPhysic()
+    {
+        rBody.gravityScale = 10;
+        rBody.velocity = new Vector2(0, 0);
+        CanMove = true;
+    }
+
 }

@@ -43,6 +43,11 @@ public class LevelSetter : EditorWindow {
         raycastBackground.name = "RaycastBackground";
         raycastBackground.transform.localScale = new Vector3(scaleX, scaleY, 0);
 
+        GameObject raycastGlobalBackgroundPrefab = Resources.Load("RaycastBackground") as GameObject;
+        GameObject raycastGlobalBackground = (GameObject)Instantiate(raycastBackgroundPrefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0));
+        raycastGlobalBackground.name = "RaycastGlobalBackground";
+        raycastGlobalBackground.transform.localScale = new Vector3(50, 50, 0);
+
         GameObject oneRoom = new GameObject();
         oneRoom.name = "OneRoom";
             

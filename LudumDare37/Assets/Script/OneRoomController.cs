@@ -4,7 +4,12 @@ using System.Collections;
 public class OneRoomController : MonoBehaviour {
 
     public float speed;
+<<<<<<< HEAD
     private GameObject player;
+=======
+    public float speedRotation;
+    public GameObject player;
+>>>>>>> 810edac4480a855840c9b76feb38d98ab7fe9ef1
     public GameObject spawn;
 
     Vector3 offset;
@@ -38,18 +43,12 @@ public class OneRoomController : MonoBehaviour {
 
             transform.position = Vector3.MoveTowards(transform.position, target, step);
 
-            print(transform.position);
-            print(target);
-
             if (transform.position == target)
             {
+                print("allo");
                 DoTranslation = false;
 
-                Time.timeScale = 1.0F;
-                Time.fixedDeltaTime = Time.fixedDeltaTime * Time.timeScale;
-
-                player.GetComponent<PlayerController>().boxCollider.enabled = true;
-                Debug.Log("Fini translation");
+                player.GetComponent<PlayerController>().resetPhysic();
             }
         }
 
@@ -57,7 +56,10 @@ public class OneRoomController : MonoBehaviour {
         {
             if(direction > 0)
             {
-                if(transform.rotation.eulerAngles.z < anglePrecedent)
+                Debug.Log(transform.rotation.eulerAngles.z);
+                Debug.Log(anglePrecedent);
+
+                if (transform.rotation.eulerAngles.z < anglePrecedent)
                 {
                     DoRotation = false;
 
@@ -80,10 +82,13 @@ public class OneRoomController : MonoBehaviour {
                         player.GetComponent<PlayerController>().resetPhysic();
                     }
                 }
+
+                anglePrecedent = transform.rotation.eulerAngles.z;
             }
             else
             {
-                if (transform.rotation.eulerAngles.z > anglePrecedent)
+
+                if (transform.rotation.eulerAngles.z > anglePrecedent )
                 {
                     DoRotation = false;
                     GetComponent<Rigidbody2D>().angularVelocity = 0;
@@ -94,7 +99,7 @@ public class OneRoomController : MonoBehaviour {
                 }
                 else
                 {
-                    if (transform.rotation.eulerAngles.z < angleInitial - 90)
+                    if (transform.rotation.eulerAngles.z < angleInitial - 90 && transform.rotation.eulerAngles.z != 0)
                     {
                         DoRotation = false;
                         GetComponent<Rigidbody2D>().angularVelocity = 0;
@@ -104,9 +109,16 @@ public class OneRoomController : MonoBehaviour {
                         player.GetComponent<PlayerController>().resetPhysic();
                     }
                 }
+
+                anglePrecedent = transform.rotation.eulerAngles.z;
+
+                if (anglePrecedent == 0)
+                {
+                    anglePrecedent = 360;
+                }
             }
 
-            anglePrecedent = transform.rotation.eulerAngles.z;
+            
         }
 	}
 
@@ -114,14 +126,12 @@ public class OneRoomController : MonoBehaviour {
     {
         target = position + offset;
 
-        Time.timeScale = 0.2F;
-        Time.fixedDeltaTime = Time.fixedDeltaTime * Time.timeScale;
         DoTranslation = true;
     }
 
     public void OneRoomRotation(int dir)
     {
-        GetComponent<Rigidbody2D>().angularVelocity = 300 * dir;
+        GetComponent<Rigidbody2D>().angularVelocity = speedRotation * dir;
 
         direction = dir;
         DoRotation = true;

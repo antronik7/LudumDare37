@@ -7,10 +7,11 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Item
 {
-    public enum TestEnum { Stuffs };
+    public enum TestEnum { LevelFixed, LevelDesign };
     public string Name;
     public TestEnum CategorieName;
     public GameObject Prefab;
+    public bool outOfRoom;
 }
 
 //[CreateAssetMenu] creates an entry in the default Create menu of the ProjectView so you can easily create an instance of this ScriptableObject

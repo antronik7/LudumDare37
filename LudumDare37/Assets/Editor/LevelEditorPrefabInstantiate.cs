@@ -263,12 +263,16 @@ public class LevelEditorPrefabInstantiate : Editor
 
         UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
     }
+
+
+    static List<string> listFixed = new List<string>() { "RaycastBackground", "Background" };
+
     public static void RemoveBlock(Vector3 position)
     {
         for (int i = 0; i < LevelParent.childCount; ++i)
         {
             float distanceToBlock = Vector3.Distance(LevelParent.GetChild(i).transform.position, position);
-            if (distanceToBlock < 0.1f)
+            if (distanceToBlock < 0.1f && listFixed.IndexOf(LevelParent.GetChild(i).gameObject.name) == -1)
             {
                 //Use Undo.DestroyObjectImmediate to destroy the object and create a proper Undo/Redo step for it
                 Undo.DestroyObjectImmediate(LevelParent.GetChild(i).gameObject);

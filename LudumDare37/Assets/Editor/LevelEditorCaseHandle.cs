@@ -82,9 +82,8 @@ public class LevelEditorCaseHandle : Editor {
             {
                 offset = hit.normal;
             }
-
-            CurrentHandlePosition.x = Mathf.Round(hit.point.x - hit.normal.x * 0.001f + offset.x);
-            CurrentHandlePosition.y = Mathf.Round(hit.point.y - hit.normal.y * 0.001f + offset.y);
+            CurrentHandlePosition.x = Mathf.Round((hit.point.x - hit.normal.x * 0.001f + offset.x)*10)/10;
+            CurrentHandlePosition.y = Mathf.Round((hit.point.y - hit.normal.y * 0.001f + offset.y) * 10)/ 10;
         }
     }
 
@@ -112,10 +111,10 @@ public class LevelEditorCaseHandle : Editor {
 
     static void DrawHandlesCube(Vector3 center)
     {
-        Vector3 p1 = center + Vector3.up * 0.5f + Vector3.right * 0.5f + Vector3.forward * 0.5f;
-        Vector3 p2 = center + Vector3.up * 0.5f - Vector3.right * 0.5f + Vector3.forward * 0.5f;
-        Vector3 p3 = center - Vector3.up * 0.5f - Vector3.right * 0.5f + Vector3.forward * 0.5f;
-        Vector3 p4 = center - Vector3.up * 0.5f + Vector3.right * 0.5f + Vector3.forward * 0.5f;
+        Vector3 p1 = center + Vector3.up * 0.1f + Vector3.right * 0.1f + Vector3.forward * 0.5f;
+        Vector3 p2 = center + Vector3.up * 0.1f - Vector3.right * 0.1f + Vector3.forward * 0.5f;
+        Vector3 p3 = center - Vector3.up * 0.1f - Vector3.right * 0.1f + Vector3.forward * 0.5f;
+        Vector3 p4 = center - Vector3.up * 0.1f + Vector3.right * 0.1f + Vector3.forward * 0.5f;
 
         //You can use Handles to draw 3d objects into the SceneView. If defined properly the
         //user can even interact with the handles. For example Unitys move tool is implemented using Handles

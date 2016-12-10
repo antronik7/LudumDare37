@@ -4,8 +4,8 @@ using System.Collections;
 public class OneRoomController : MonoBehaviour {
 
     public float speed;
+    private GameObject player;
     public float speedRotation;
-    public GameObject player;
     public GameObject spawn;
 
     Vector3 offset;
@@ -21,6 +21,7 @@ public class OneRoomController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+		player = GameObject.FindGameObjectWithTag ("Player");
         step = speed * Time.deltaTime;
         offset = transform.position - spawn.transform.position;
     }

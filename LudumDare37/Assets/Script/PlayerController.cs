@@ -16,13 +16,14 @@ public class PlayerController : MonoBehaviour {
     public bool isHooked = false;
     public Transform hook = null;
 
-    // Use this for initialization
+	private float baseGravityScale;
+
     void Start () {
         rBody = GetComponent<Rigidbody2D>();
+		baseGravityScale = rBody.gravityScale;
         boxCollider = GetComponent<BoxCollider2D>();
     }
-	
-	// Update is called once per frame
+
 	void Update () {
 
         if (isHooked)
@@ -62,32 +63,38 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetButtonDown("Fire1"))
         {
             boxCollider.enabled = false;
+            rBody.gravityScale = 0;
+            rBody.velocity = new Vector2(0, 0);
+            CanMove = false;
+
             OneRoom.GetComponent<OneRoomController>().OneRoomTranslation(transform.position);
         }
 
         if (Input.GetButtonDown("Fire2"))
         {
-            OneRoom.GetComponent<OneRoomController>().OneRoomRotation(1);
-
             boxCollider.enabled = false;
             rBody.gravityScale = 0;
             rBody.velocity = new Vector2(0, 0);
             CanMove = false;
+
+            OneRoom.GetComponent<OneRoomController>().OneRoomRotation(1);
         }
 
         if (Input.GetButtonDown("Fire3"))
         {
-            OneRoom.GetComponent<OneRoomController>().OneRoomRotation(-1);
-
+            boxCollider.enabled = false;
             rBody.gravityScale = 0;
             rBody.velocity = new Vector2(0, 0);
             CanMove = false;
+
+            OneRoom.GetComponent<OneRoomController>().OneRoomRotation(-1);
         }
     }
 
     public void resetPhysic()
     {
-        rBody.gravityScale = 10;
+        boxCollider.enabled = true;
+        rBody.gravityScale = baseGravityScale;
         rBody.velocity = new Vector2(0, 0);
         CanMove = true;
     }

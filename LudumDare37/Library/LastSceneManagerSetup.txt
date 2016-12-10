@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/mainAntoine.unity
+- path: Assets/Scenes/MainFlorian.unity
   isLoaded: 1
   isActive: 1

@@ -88,12 +88,6 @@ public class PlayerController : MonoBehaviour {
                 rBody.velocity = new Vector2(0, 0);
                 CanMove = false;
                 rBody.constraints = RigidbodyConstraints2D.None;
-
-<<<<<<< HEAD
-        if (Input.GetButtonDown("Rewind"))
-        {
-            Rewinder.rewind();
-=======
                 StartCoroutine(WaitForRotation(-1));
             }
 
@@ -114,16 +108,15 @@ public class PlayerController : MonoBehaviour {
             {
                 Rewinder.rewind();
             }
->>>>>>> 6f342851f77ed792846425e670a922483a79831b
-        }
-        if (Input.GetButton("UnzoomCamera"))
-        {
-            CameraController.instance.unzoomCamera();
-        }
-        else
-        {
-            CameraController.instance.resetCamera();
-        }
+            }
+            if (Input.GetButton("UnzoomCamera"))
+            {
+                CameraController.instance.unzoomCamera();
+            }
+            else
+            {
+                CameraController.instance.resetCamera();
+            }
     }
 
 

@@ -28,8 +28,6 @@ public class OneRoomController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        //Debug.Log(transform.rotation.eulerAngles);
-
         if(DoTranslation)
         {
             step = speed * Time.deltaTime;
@@ -40,20 +38,21 @@ public class OneRoomController : MonoBehaviour {
 
             if (transform.position == target)
             {
-                print("allo");
                 DoTranslation = false;
 
                 player.GetComponent<PlayerController>().resetPhysic();
+                player.transform.parent = transform;
             }
         }
 
         if(DoRotation)
         {
-            if(direction > 0)
-            {
-                Debug.Log(transform.rotation.eulerAngles.z);
-                Debug.Log(anglePrecedent);
+            player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
+            player.transform.RotateAround(transform.position, Vector3.forward, direction * Time.deltaTime * speedRotation);
+
+            if (direction > 0)
+            {
                 if (transform.rotation.eulerAngles.z < anglePrecedent)
                 {
                     DoRotation = false;
@@ -61,8 +60,11 @@ public class OneRoomController : MonoBehaviour {
                     GetComponent<Rigidbody2D>().angularVelocity = 0;
 
                     transform.rotation = Quaternion.Euler(0, 0, angleInitial + 90);
+                    player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
                     player.GetComponent<PlayerController>().resetPhysic();
+
+                    player.transform.parent = null;
                 }
                 else
                 {
@@ -73,8 +75,11 @@ public class OneRoomController : MonoBehaviour {
                         GetComponent<Rigidbody2D>().angularVelocity = 0;
 
                         transform.rotation = Quaternion.Euler(0, 0, angleInitial + 90);
+                        player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
                         player.GetComponent<PlayerController>().resetPhysic();
+
+                        player.transform.parent = null;
                     }
                 }
 
@@ -82,38 +87,43 @@ public class OneRoomController : MonoBehaviour {
             }
             else
             {
-
-                if (transform.rotation.eulerAngles.z > anglePrecedent )
+                if ((int)transform.rotation.eulerAngles.z > anglePrecedent)
                 {
                     DoRotation = false;
+
                     GetComponent<Rigidbody2D>().angularVelocity = 0;
 
                     transform.rotation = Quaternion.Euler(0, 0, angleInitial - 90);
+                    player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
                     player.GetComponent<PlayerController>().resetPhysic();
+
+                    player.transform.parent = null;
                 }
                 else
                 {
-                    if (transform.rotation.eulerAngles.z < angleInitial - 90 && transform.rotation.eulerAngles.z != 0)
+                    if ((int)transform.rotation.eulerAngles.z < angleInitial - 90 && (int)transform.rotation.eulerAngles.z != 0)
                     {
                         DoRotation = false;
+
                         GetComponent<Rigidbody2D>().angularVelocity = 0;
 
                         transform.rotation = Quaternion.Euler(0, 0, angleInitial - 90);
+                        player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
                         player.GetComponent<PlayerController>().resetPhysic();
+
+                        player.transform.parent = null;
                     }
                 }
 
-                anglePrecedent = transform.rotation.eulerAngles.z;
+                anglePrecedent = (int)transform.rotation.eulerAngles.z;
 
-                if (anglePrecedent == 0)
+                if (anglePrecedent == 0 && angleInitial != 90)
                 {
                     anglePrecedent = 360;
                 }
             }
-
-            
         }
 	}
 
@@ -127,17 +137,21 @@ public class OneRoomController : MonoBehaviour {
     public void OneRoomRotation(int dir)
     {
         GetComponent<Rigidbody2D>().angularVelocity = speedRotation * dir;
+        //player.GetComponent<Rigidbody2D>().angularVelocity = (speedRotation * 100) * dir * -1;
+
+        //player.transform.SetParent(transform);
 
         direction = dir;
         DoRotation = true;
 
-        angleInitial = transform.rotation.eulerAngles.z;
+        angleInitial = (int)transform.rotation.eulerAngles.z;
 
-        if (direction == -1 && angleInitial == 0)
+        if (direction == -1 && (int)angleInitial == 0)
         {
             angleInitial = 360;
         }
 
+        print(angleInitial);
         anglePrecedent = angleInitial;
     }
 
@@ -151,5 +165,10 @@ public class OneRoomController : MonoBehaviour {
     public float getInitialDistanceBetweenPlayerSpawn()
     {
         return transitionInitialDistancePlayerSpawn;
+    }
+
+    void finirRotation()
+    {
+
     }
 }

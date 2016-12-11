@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
     public float j_force;
     public bool IsGround = false;
     public BoxCollider2D boxCollider;
+    
 
     private Rigidbody2D rBody;
     private bool CanMove = true;
@@ -29,7 +30,6 @@ public class PlayerController : MonoBehaviour {
 
         if (isHooked)
         {
-            print("isHooked");
             if(hook != null)
             {
                 rBody.velocity = new Vector2(0, 0);
@@ -45,11 +45,15 @@ public class PlayerController : MonoBehaviour {
                 hook = null;
             }
         }
-        else if (CanMove)
-        {
-            float move = Input.GetAxisRaw("Horizontal");
-            rBody.velocity = new Vector2(move * m_speed, rBody.velocity.y);
 
+        if (CanMove)
+        {
+            if(!isHooked)
+            {
+                float move = Input.GetAxisRaw("Horizontal");
+                rBody.velocity = new Vector2(move * m_speed, rBody.velocity.y);
+            }
+            
             if (IsGround)
             {
                 if (Input.GetButtonDown("Jump"))
@@ -132,6 +136,11 @@ public class PlayerController : MonoBehaviour {
         rBody.velocity = new Vector2(0, 0);
         rBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         CanMove = true;
+    }
+
+    public bool canIMove()
+    {
+        return CanMove;
     }
 
     IEnumerator WaitForRotation(int direction)

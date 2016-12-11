@@ -3,47 +3,42 @@ using System.Collections;
 
 public class MovingPlatform : MonoBehaviour {
 
-	float step;
-	public float speed;
+    public GameObject platform;
+    public float moveSpeed;
+    public float pauseTime;
+    public Transform[] points;
 
-	public float distance;
-	public bool isHorizontal;
+    Transform currentPoint;
+    int pointSelection = 0;
 
-	Vector3 target;
-
-	public float timePaused;
-	float timeChrono;
-	bool isPaused = false;
 
 	void Start () {
-		timeChrono = timePaused;
-		launchPlatform ();
+        currentPoint = points[pointSelection];
 	}
 
 	void Update () {
-		if (isPaused) {
-			if (timeChrono <= 0) {
-				timeChrono = timePaused;
-				distance *= -1;
-				isPaused = false;
-				launchPlatform ();
-			} else {
-				timeChrono -= Time.deltaTime;
-			}
-		} else {
-			step = speed * Time.deltaTime;
-			transform.position = Vector3.MoveTowards (transform.position, target, step);
-			if (transform.position == target) {
-				isPaused = true;
-			}
-		}
-	
-	}
+        platform.transform.position = Vector3.MoveTowards(platform.transform.position, currentPoint.position, Time.deltaTime * moveSpeed);
 
-	public void launchPlatform(){
-		if (isHorizontal) {
-			target = new Vector3 (transform.position.x + distance, transform.position.y, transform.position.z);
-		} else
-			target = new Vector3 (transform.position.x, transform.position.y + distance, transform.position.z);
-	}
+        if(platform.transform.position == currentPoint.position)
+        {
+            pointSelection++;
+
+            if(pointSelection == points.Length)
+            {
+                pointSelection = 0;
+            }
+
+            currentPoint = points[pointSelection];
+
+            StartCoroutine(Wait());
+        }
+    }
+
+    IEnumerator Wait()
+    {
+        float speedTemp = moveSpeed;
+        moveSpeed = 0;
+        yield return new WaitForSeconds(pauseTime);
+        moveSpeed = speedTemp;
+    }
 }

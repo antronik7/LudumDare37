@@ -8,6 +8,7 @@ public class OneRoomController : MonoBehaviour {
     public float speedRotation;
     public float speedSymetrie;
     public GameObject spawn;
+    public GameObject rotationHook;
 
     Vector3 offset;
     bool DoTranslation = false;
@@ -18,6 +19,7 @@ public class OneRoomController : MonoBehaviour {
     int direction;
     float transitionInitialDistancePlayerSpawn = 0;
     float ScaleTarget;
+    GameObject leTrucATourner;
 
     float step;
     Vector3 target;
@@ -96,75 +98,42 @@ public class OneRoomController : MonoBehaviour {
         {
             player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
-            player.transform.RotateAround(transform.position, Vector3.forward, direction * Time.deltaTime * speedRotation);
+            if(player.GetComponent<PlayerController>().isHooked == false)
+            {
+                player.transform.RotateAround(transform.position, Vector3.forward, direction * Time.deltaTime * speedRotation);
+            }
 
             if (direction > 0)
             {
-                if (transform.rotation.eulerAngles.z < anglePrecedent)
+                if (leTrucATourner.transform.rotation.eulerAngles.z < anglePrecedent)
                 {
-                    DoRotation = false;
-
-                    GetComponent<Rigidbody2D>().angularVelocity = 0;
-
-                    transform.rotation = Quaternion.Euler(0, 0, angleInitial + 90);
-                    player.transform.rotation = Quaternion.Euler(0, 0, 0);
-
-                    player.GetComponent<PlayerController>().resetPhysic();
-
-                    player.transform.parent = null;
+                    finirRotation();
                 }
                 else
                 {
-                    if (transform.rotation.eulerAngles.z > angleInitial + 90)
+                    if (leTrucATourner.transform.rotation.eulerAngles.z > angleInitial + 90)
                     {
-                        DoRotation = false;
-
-                        GetComponent<Rigidbody2D>().angularVelocity = 0;
-
-                        transform.rotation = Quaternion.Euler(0, 0, angleInitial + 90);
-                        player.transform.rotation = Quaternion.Euler(0, 0, 0);
-
-                        player.GetComponent<PlayerController>().resetPhysic();
-
-                        player.transform.parent = null;
+                        finirRotation();
                     }
                 }
 
-                anglePrecedent = transform.rotation.eulerAngles.z;
+                anglePrecedent = leTrucATourner.transform.rotation.eulerAngles.z;
             }
             else
             {
-                if ((int)transform.rotation.eulerAngles.z > anglePrecedent)
+                if ((int)leTrucATourner.transform.rotation.eulerAngles.z > anglePrecedent)
                 {
-                    DoRotation = false;
-
-                    GetComponent<Rigidbody2D>().angularVelocity = 0;
-
-                    transform.rotation = Quaternion.Euler(0, 0, angleInitial - 90);
-                    player.transform.rotation = Quaternion.Euler(0, 0, 0);
-
-                    player.GetComponent<PlayerController>().resetPhysic();
-
-                    player.transform.parent = null;
+                    finirRotation();
                 }
                 else
                 {
-                    if ((int)transform.rotation.eulerAngles.z < angleInitial - 90 && (int)transform.rotation.eulerAngles.z != 0)
+                    if ((int)leTrucATourner.transform.rotation.eulerAngles.z < angleInitial - 90 && (int)leTrucATourner.transform.rotation.eulerAngles.z != 0)
                     {
-                        DoRotation = false;
-
-                        GetComponent<Rigidbody2D>().angularVelocity = 0;
-
-                        transform.rotation = Quaternion.Euler(0, 0, angleInitial - 90);
-                        player.transform.rotation = Quaternion.Euler(0, 0, 0);
-
-                        player.GetComponent<PlayerController>().resetPhysic();
-
-                        player.transform.parent = null;
+                        finirRotation();
                     }
                 }
 
-                anglePrecedent = (int)transform.rotation.eulerAngles.z;
+                anglePrecedent = (int)leTrucATourner.transform.rotation.eulerAngles.z;
 
                 if (anglePrecedent == 0 && angleInitial != 90)
                 {
@@ -203,22 +172,28 @@ public class OneRoomController : MonoBehaviour {
     {
         Rewinder.addRotation(player.transform.position, dir);
 
-        GetComponent<Rigidbody2D>().angularVelocity = speedRotation * dir;
-        //player.GetComponent<Rigidbody2D>().angularVelocity = (speedRotation * 100) * dir * -1;
+        if(player.GetComponent<PlayerController>().isHooked)
+        {
+            leTrucATourner = Instantiate(rotationHook, player.transform.position, Quaternion.identity) as GameObject;
+            transform.parent = leTrucATourner.transform;
+        }
+        else
+        {
+            leTrucATourner = gameObject;
+        }
 
-        //player.transform.SetParent(transform);
+        leTrucATourner.GetComponent<Rigidbody2D>().angularVelocity = speedRotation * dir;
 
         direction = dir;
         DoRotation = true;
 
-        angleInitial = (int)transform.rotation.eulerAngles.z;
+        angleInitial = (int)leTrucATourner.transform.rotation.eulerAngles.z;
 
         if (direction == -1 && (int)angleInitial == 0)
         {
             angleInitial = 360;
         }
 
-        print(angleInitial);
         anglePrecedent = angleInitial;
     }
 
@@ -274,6 +249,34 @@ public class OneRoomController : MonoBehaviour {
             }
 
             return s_Instance;
+        }
+    }
+
+    void finirRotation()
+    {
+        DoRotation = false;
+
+        leTrucATourner.GetComponent<Rigidbody2D>().angularVelocity = 0;
+
+        Debug.Log(angleInitial);
+
+        if(angleInitial == 179)
+        {
+            angleInitial = 180;
+        }
+
+        leTrucATourner.transform.rotation = Quaternion.Euler(0, 0, angleInitial + (90 * direction));
+
+        player.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        player.GetComponent<PlayerController>().resetPhysic();
+
+        player.transform.parent = null;
+
+        if(player.GetComponent<PlayerController>().isHooked)
+        {
+            transform.parent = null;
+            Destroy(leTrucATourner);
         }
     }
 }

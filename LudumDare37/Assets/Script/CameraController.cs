@@ -75,7 +75,7 @@ public class CameraController : MonoBehaviour
                     }
                     else
                     {
-                        screenPoint = GetComponent<Camera>().WorldToViewportPoint(StarController.instance.transform.position);
+                        screenPoint = GetComponent<Camera>().WorldToViewportPoint(KeyLockController.instance.transform.position);
                         onScreen = screenPoint.z > 0 && screenPoint.x > 0.1 && screenPoint.x < 0.9 && screenPoint.y > 0.1 && screenPoint.y < 0.9;
                     }
                     if (onScreen)

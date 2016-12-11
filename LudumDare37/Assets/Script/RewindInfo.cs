@@ -5,7 +5,7 @@ using System.Collections;
 public class RewindInfo
 {
     Vector3 playerPos;
-    int type;//0 translate; 1 rotate; 2 mirror
+    int type;//0 translate; 1 rotate; 2 symetri
     Vector3 roomPos;
     int dir;
 
@@ -48,7 +48,7 @@ public class RewindInfo
                 PlayerController.instance.moveTo(this.playerPos);
                 break;
             case 2:
-                OneRoomController.instance.moveTo(this.roomPos);
+                OneRoomController.instance.doSymetrie();
                 PlayerController.instance.moveTo(this.playerPos);
                 break;
             default:

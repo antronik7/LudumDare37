@@ -166,6 +166,7 @@ public class OneRoomController : MonoBehaviour {
 
     public void OneRoomSymetrie()
     {
+        Rewinder.addSymetrie(player.transform.position);
         ScaleTarget = transform.localScale.x * -1;
         DoSymetrie = true;
     }
@@ -208,6 +209,11 @@ public class OneRoomController : MonoBehaviour {
     public void moveTo(Vector3 roomPosition)
     {
         gameObject.transform.position = roomPosition;
+    }
+
+    public void doSymetrie()
+    {
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }
 
     public void rotateTo(int dir)

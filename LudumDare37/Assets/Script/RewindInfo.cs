@@ -40,19 +40,22 @@ public class RewindInfo
         switch (type)
         {
             case 0:
+                RessourceManager.instance.NbrTranslation += 1;
                 OneRoomController.instance.moveTo(this.roomPos);
                 PlayerController.instance.moveTo(this.playerPos);
-                PlayerController.instance.GetComponent<AudioSource>().PlayOneShot(PlayerController.instance.rewindTranslationSound, 1f);
+                AudioController.instance.playClip(3);
                 break;
             case 1:
+                RessourceManager.instance.NbrRotation += 1;
                 OneRoomController.instance.rotateTo(dir);
                 PlayerController.instance.moveTo(this.playerPos);
-                PlayerController.instance.GetComponent<AudioSource>().PlayOneShot(PlayerController.instance.rewindRotationSound, 1f);
+                AudioController.instance.playClip(5);
                 break;
             case 2:
+                RessourceManager.instance.NbrSymetrie += 1;
                 OneRoomController.instance.doSymetrie();
                 PlayerController.instance.moveTo(this.playerPos);
-                PlayerController.instance.GetComponent<AudioSource>().PlayOneShot(PlayerController.instance.rewindSymetrieSound, 1f);
+                AudioController.instance.playClip(7);
                 break;
             default:
                 break;

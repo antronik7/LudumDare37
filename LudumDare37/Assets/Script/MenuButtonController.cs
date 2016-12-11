@@ -39,4 +39,16 @@ public class MenuButtonController : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("Level" + level);
     }
 
+    public void onSelect()
+    {
+        if(level < 6)
+        {
+            transform.parent.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 1f;
+        }
+        if (level > 10)
+        {
+            transform.parent.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 0.6f;
+        }
+    }
+
 }

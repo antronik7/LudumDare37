@@ -1,4 +1,12 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/mainAntoine.unity
+=======
+<<<<<<< HEAD
+- path: Assets/Scenes/mainSulexa.unity
+=======
+- path: Assets/Scenes/mainHugo.unity
+>>>>>>> 4331c81cbbc2d4d00fa7b7e74829d2ac633d88b1
+>>>>>>> 0914ba615314c0bf39b536b36d3d23a98a5c450b
   isLoaded: 1
   isActive: 1

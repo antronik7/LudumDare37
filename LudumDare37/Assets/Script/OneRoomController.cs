@@ -4,8 +4,8 @@ using System.Collections;
 public class OneRoomController : MonoBehaviour {
 
     public float speed;
+    private GameObject player;
     public float speedRotation;
-    public GameObject player;
     public GameObject spawn;
 
     Vector3 offset;
@@ -21,6 +21,7 @@ public class OneRoomController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+		player = GameObject.FindGameObjectWithTag ("Player");
         step = speed * Time.deltaTime;
         offset = transform.position - spawn.transform.position;
     }
@@ -129,6 +130,7 @@ public class OneRoomController : MonoBehaviour {
 
     public void OneRoomTranslation(Vector3 position)
     {
+        Rewinder.addTranslation(position, gameObject.transform.position);
         target = position + offset;
 
         DoTranslation = true;
@@ -167,8 +169,40 @@ public class OneRoomController : MonoBehaviour {
         return transitionInitialDistancePlayerSpawn;
     }
 
+<<<<<<< HEAD
     void finirRotation()
     {
 
+=======
+    public void moveTo(Vector3 roomPosition)
+    {
+        gameObject.transform.position = roomPosition;
+    }
+
+    private static OneRoomController s_Instance = null;
+
+    // This defines a static instance property that attempts to find the manager object in the scene and
+    // returns it to the caller.
+    public static OneRoomController instance
+    {
+        get
+        {
+            if (s_Instance == null)
+            {
+                // This is where the magic happens.
+                //  FindObjectOfType(...) returns the first AManager object in the scene.
+                s_Instance = FindObjectOfType(typeof(OneRoomController)) as OneRoomController;
+            }
+
+            // If it is still null, create a new instance
+            if (s_Instance == null)
+            {
+                GameObject obj = new GameObject("OneRoom");
+                s_Instance = obj.AddComponent(typeof(OneRoomController)) as OneRoomController;
+            }
+
+            return s_Instance;
+        }
+>>>>>>> 0914ba615314c0bf39b536b36d3d23a98a5c450b
     }
 }

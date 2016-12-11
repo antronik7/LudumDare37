@@ -3,23 +3,24 @@ using System.Collections;
 
 public class TeleporteurController : MonoBehaviour {
 
-    public GameObject Player;
+    private GameObject Player;
     public GameObject SortieWrap;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	[HideInInspector]public static bool canTeleport = true;
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Player")
-        {
-            Player.transform.position = SortieWrap.transform.position;
-        }
+		if ((other.tag == "Player") && (canTeleport)) {
+			Player = other.gameObject;
+			canTeleport = false;
+			Player.transform.position = SortieWrap.transform.position;
+		} else if ((other.tag == "Player") && (!canTeleport)) {
+			StartCoroutine(waitBeforeCanTeleport());
+		}
     }
+
+	public IEnumerator waitBeforeCanTeleport(){
+		yield return new WaitForSeconds (0.75f);
+		canTeleport = true;
+	}
+
 }

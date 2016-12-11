@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-    public GameObject OneRoom;
+    private GameObject OneRoom;
 
     public float m_speed;
     public float j_force;
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour {
         rBody = GetComponent<Rigidbody2D>();
 		baseGravityScale = rBody.gravityScale;
         boxCollider = GetComponent<BoxCollider2D>();
+		OneRoom = GameObject.FindGameObjectWithTag ("Room");
     }
 
 	void Update () {
@@ -66,7 +67,7 @@ public class PlayerController : MonoBehaviour {
             rBody.gravityScale = 0;
             rBody.velocity = new Vector2(0, 0);
             CanMove = false;
-
+            
             OneRoom.GetComponent<OneRoomController>().OneRoomTranslation(transform.position);
         }
 
@@ -91,6 +92,18 @@ public class PlayerController : MonoBehaviour {
 
             StartCoroutine(WaitForRotation(-1));
         }
+
+
+        if (Input.GetButtonDown("Rewind"))
+        {
+            Rewinder.rewind();
+        }
+    }
+
+
+    public void moveTo(Vector3 playerPosition)
+    {
+        gameObject.transform.position = playerPosition;
     }
 
     public void resetPhysic()
@@ -102,10 +115,38 @@ public class PlayerController : MonoBehaviour {
         CanMove = true;
     }
 
+<<<<<<< HEAD
     IEnumerator WaitForRotation(int direction)
     {
         yield return new WaitForSeconds(0.5f);
 
         OneRoom.GetComponent<OneRoomController>().OneRoomRotation(direction);
+=======
+    private static PlayerController s_Instance = null;
+
+    // This defines a static instance property that attempts to find the manager object in the scene and
+    // returns it to the caller.
+    public static PlayerController instance
+    {
+        get
+        {
+            if (s_Instance == null)
+            {
+                // This is where the magic happens.
+                //  FindObjectOfType(...) returns the first AManager object in the scene.
+                s_Instance = FindObjectOfType(typeof(PlayerController)) as PlayerController;
+            }
+
+            // If it is still null, create a new instance
+            if (s_Instance == null)
+            {
+                Debug.Log("error");
+                GameObject obj = new GameObject("Error");
+                s_Instance = obj.AddComponent(typeof(PlayerController)) as PlayerController;
+            }
+
+            return s_Instance;
+        }
+>>>>>>> 0914ba615314c0bf39b536b36d3d23a98a5c450b
     }
 }

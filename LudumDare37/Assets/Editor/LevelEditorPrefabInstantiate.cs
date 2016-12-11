@@ -8,21 +8,42 @@ using System.Collections.Generic;
 public class LevelEditorPrefabInstantiate : Editor 
 {
     static Transform m_LevelParent;
+
     static Transform LevelParent
     {
         get
         {
-            if( m_LevelParent == null )
+            if (m_LevelParent == null)
             {
-                GameObject go = GameObject.Find( "OneRoom" );//le GameObject ou l'on vas stocké nos gameobjects
+                GameObject go = GameObject.Find("OneRoom");//le GameObject ou l'on vas stocké nos gameobjects
 
-                if( go != null )
+                if (go != null)
                 {
                     m_LevelParent = go.transform;
                 }
             }
 
             return m_LevelParent;
+        }
+    }
+
+    static Transform m_LevelParentGlobal;
+
+    static Transform LevelParentGlobal
+    {
+        get
+        {
+            if (m_LevelParentGlobal == null)
+            {
+                GameObject go = GameObject.Find("OneRoomGlobal");//le GameObject ou l'on vas stocké nos gameobjects
+
+                if (go != null)
+                {
+                    m_LevelParentGlobal = go.transform;
+                }
+            }
+
+            return m_LevelParentGlobal;
         }
     }
 
@@ -128,7 +149,22 @@ public class LevelEditorPrefabInstantiate : Editor
                 {
                     if( SelectedBlock < item.Blocks.Count )
                     {
-                        AddBlock(LevelEditorCaseHandle.CurrentHandlePosition, item.Blocks[ SelectedBlock ].Prefab );
+                        AddBlock(LevelEditorCaseHandle.CurrentHandlePosition, item.Blocks[SelectedBlock].Prefab, item.Blocks[SelectedBlock].outOfRoom);
+                        /*
+
+                        if (!item.Blocks[SelectedBlock].outOfRoom)//si il peut pas être out of room
+                        {
+                            Ray ray = HandleUtility.GUIPointToWorldRay(LevelEditorCaseHandle.CurrentHandlePosition);
+                            Debug.Log(Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity).collider.gameObject.name);
+                            if (Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity).collider.gameObject.name == "RaycastBackground")
+                            {
+                                AddBlock(LevelEditorCaseHandle.CurrentHandlePosition, item.Blocks[SelectedBlock].Prefab, item.Blocks[SelectedBlock].outOfRoom);
+                            }
+                        }
+                        else
+                        {
+                            AddBlock(LevelEditorCaseHandle.CurrentHandlePosition, item.Blocks[SelectedBlock].Prefab, item.Blocks[SelectedBlock].outOfRoom);
+                        }*/
                     }
                 }
             }
@@ -161,7 +197,7 @@ public class LevelEditorPrefabInstantiate : Editor
             DrawCustomBlockButton( i, sceneView.position );
         }*/
 
-        Handles.EndGUI();
+                        Handles.EndGUI();
     }
 
 
@@ -247,7 +283,7 @@ public class LevelEditorPrefabInstantiate : Editor
         }*/
     }
 
-    public static void AddBlock( Vector3 position, GameObject prefab )
+    public static void AddBlock( Vector3 position, GameObject prefab, bool outOfRoom)
     {
         if( prefab == null )
         {
@@ -255,7 +291,14 @@ public class LevelEditorPrefabInstantiate : Editor
         }
         RemoveBlock(position);
         GameObject newCube = (GameObject)PrefabUtility.InstantiatePrefab( prefab );
-        newCube.transform.parent = LevelParent;
+        if (!outOfRoom)
+        {
+            newCube.transform.parent = m_LevelParent;
+        }
+        else
+        {
+            newCube.transform.parent = LevelParentGlobal;
+        }
         newCube.transform.position = position;
 
         //Make sure a proper Undo/Redo step is created. This is a special type for newly created objects
@@ -276,6 +319,19 @@ public class LevelEditorPrefabInstantiate : Editor
             {
                 //Use Undo.DestroyObjectImmediate to destroy the object and create a proper Undo/Redo step for it
                 Undo.DestroyObjectImmediate(LevelParent.GetChild(i).gameObject);
+
+                //Mark the scene as dirty so it is being saved the next time the user saves
+                UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
+                return;
+            }
+        }
+        for (int i = 0; i < LevelParentGlobal.childCount; ++i)
+        {
+            float distanceToBlock = Vector3.Distance(LevelParentGlobal.GetChild(i).transform.position, position);
+            if (distanceToBlock < 0.1f && listFixed.IndexOf(LevelParentGlobal.GetChild(i).gameObject.name) == -1)
+            {
+                //Use Undo.DestroyObjectImmediate to destroy the object and create a proper Undo/Redo step for it
+                Undo.DestroyObjectImmediate(LevelParentGlobal.GetChild(i).gameObject);
 
                 //Mark the scene as dirty so it is being saved the next time the user saves
                 UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();

@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 public class ExitController : MonoBehaviour {
 
     public string levelName;
+	private bool isKey = false;
+	public void setIsKey(bool val){isKey = val;}
+	public bool getIsKey(){return isKey;}
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +23,8 @@ public class ExitController : MonoBehaviour {
     {
         //print("TriggerEnter");
         //Si joueur :
+		if (isKey)
+			return;
         if(other.tag == "Player")
         {
             StartCoroutine(LoadLevelCoroutine());

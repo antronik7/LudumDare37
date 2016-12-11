@@ -19,6 +19,15 @@ public class PlayerController : MonoBehaviour {
 
 	private float baseGravityScale;
 
+    public AudioClip jumpSound;
+    public AudioClip translationSound;
+    public AudioClip rotationSound;
+    public AudioClip symetrieSound;
+
+    public AudioClip rewindTranslationSound;
+    public AudioClip rewindRotationSound;
+    public AudioClip rewindSymetrieSound;
+
     void Start () {
         rBody = GetComponent<Rigidbody2D>();
 		baseGravityScale = rBody.gravityScale;
@@ -38,6 +47,7 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetButtonDown("Jump"))
             {
+                GetComponent<AudioSource>().PlayOneShot(jumpSound, 1f);
                 rBody.velocity = new Vector2(rBody.velocity.x, j_force);
 
                 IsGround = false;
@@ -58,6 +68,7 @@ public class PlayerController : MonoBehaviour {
             {
                 if (Input.GetButtonDown("Jump"))
                 {
+                    GetComponent<AudioSource>().PlayOneShot(jumpSound, 1f);
                     rBody.velocity = new Vector2(rBody.velocity.x, j_force);
 
                     IsGround = false;
@@ -66,6 +77,8 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetButtonDown("Fire1"))
             {
+                GetComponent<AudioSource>().PlayOneShot(translationSound, 1f);
+
                 boxCollider.enabled = false;
                 rBody.gravityScale = 0;
                 rBody.velocity = new Vector2(0, 0);
@@ -76,6 +89,8 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetAxis("Fire2") > 0.1)
             {
+                GetComponent<AudioSource>().PlayOneShot(rotationSound, 1f);
+
                 boxCollider.enabled = false;
                 rBody.gravityScale = 0;
                 rBody.velocity = new Vector2(0, 0);
@@ -87,6 +102,8 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetAxis("Fire3") > 0.1)
             {
+                GetComponent<AudioSource>().PlayOneShot(rotationSound, 1f);
+
                 boxCollider.enabled = false;
                 rBody.gravityScale = 0;
                 rBody.velocity = new Vector2(0, 0);
@@ -97,6 +114,8 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetButtonDown("Fire4"))
             {
+                GetComponent<AudioSource>().PlayOneShot(symetrieSound, 1f);
+
                 boxCollider.enabled = false;
                 rBody.gravityScale = 0;
                 rBody.velocity = new Vector2(0, 0);

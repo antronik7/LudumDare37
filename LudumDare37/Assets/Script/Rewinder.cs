@@ -25,7 +25,7 @@ public class Rewinder : MonoBehaviour {
     {
         listState.Push(new RewindInfo(playerPos, 1, dir));
     }
-    public static void addMiror(Vector3 playerPos)
+    public static void addSymetrie(Vector3 playerPos)
     {
         listState.Push(new RewindInfo(playerPos, 2));
     }

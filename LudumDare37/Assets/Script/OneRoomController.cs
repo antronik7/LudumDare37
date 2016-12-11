@@ -156,6 +156,7 @@ public class OneRoomController : MonoBehaviour {
 
     public void OneRoomSymetrie()
     {
+        Rewinder.addSymetrie(player.transform.position);
         if (transform.rotation.eulerAngles.z == 270 || transform.rotation.eulerAngles.z == 90)
         {
             ScaleTarget = (int)transform.localScale.y * -1;
@@ -164,8 +165,7 @@ public class OneRoomController : MonoBehaviour {
         {
             ScaleTarget = (int)transform.localScale.x * -1;
         }
-        
-        DoSymetrie = true;
+                DoSymetrie = true;
     }
 
     public void OneRoomRotation(int dir)
@@ -212,6 +212,11 @@ public class OneRoomController : MonoBehaviour {
     public void moveTo(Vector3 roomPosition)
     {
         gameObject.transform.position = roomPosition;
+    }
+
+    public void doSymetrie()
+    {
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }
 
     public void rotateTo(int dir)

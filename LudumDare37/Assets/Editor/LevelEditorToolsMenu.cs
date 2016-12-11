@@ -108,7 +108,7 @@ public class LevelEditorToolsMenu : Editor
         return UnityEditor.SceneManagement.EditorSceneManager.GetActiveScene().name == "GameE07"
             || UnityEditor.SceneManagement.EditorSceneManager.GetActiveScene().name == "GameE08"
             || UnityEditor.SceneManagement.EditorSceneManager.GetActiveScene().name == "GameE09";*/
-        return UnityEditor.SceneManagement.EditorSceneManager.GetActiveScene().name.Contains("level");
+        return UnityEditor.SceneManagement.EditorSceneManager.GetActiveScene().name.Contains("Level");
     }
 
     static void DrawToolsMenu( Rect position )

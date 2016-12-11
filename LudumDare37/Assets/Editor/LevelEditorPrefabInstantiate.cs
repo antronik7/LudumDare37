@@ -27,6 +27,7 @@ public class LevelEditorPrefabInstantiate : Editor
         }
     }
 
+    /*
     static Transform m_LevelParentGlobal;
 
     static Transform LevelParentGlobal
@@ -45,7 +46,7 @@ public class LevelEditorPrefabInstantiate : Editor
 
             return m_LevelParentGlobal;
         }
-    }
+    }*/
 
 
 
@@ -295,10 +296,6 @@ public class LevelEditorPrefabInstantiate : Editor
         {
             newCube.transform.parent = m_LevelParent;
         }
-        else
-        {
-            newCube.transform.parent = LevelParentGlobal;
-        }
         newCube.transform.position = position;
 
         //Make sure a proper Undo/Redo step is created. This is a special type for newly created objects
@@ -315,7 +312,7 @@ public class LevelEditorPrefabInstantiate : Editor
         for (int i = 0; i < LevelParent.childCount; ++i)
         {
             float distanceToBlock = Vector3.Distance(LevelParent.GetChild(i).transform.position, position);
-            if (distanceToBlock < 0.1f && listFixed.IndexOf(LevelParent.GetChild(i).gameObject.name) == -1)
+            if (distanceToBlock < 0.5f && listFixed.IndexOf(LevelParent.GetChild(i).gameObject.name) == -1)
             {
                 //Use Undo.DestroyObjectImmediate to destroy the object and create a proper Undo/Redo step for it
                 Undo.DestroyObjectImmediate(LevelParent.GetChild(i).gameObject);
@@ -325,6 +322,7 @@ public class LevelEditorPrefabInstantiate : Editor
                 return;
             }
         }
+        /*
         for (int i = 0; i < LevelParentGlobal.childCount; ++i)
         {
             float distanceToBlock = Vector3.Distance(LevelParentGlobal.GetChild(i).transform.position, position);
@@ -337,7 +335,7 @@ public class LevelEditorPrefabInstantiate : Editor
                 UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
                 return;
             }
-        }
+        }*/
     }
 
     //I will use this type of function in many different classes. Basically this is useful to 
@@ -345,6 +343,6 @@ public class LevelEditorPrefabInstantiate : Editor
     //can have an easy to follow progression of the editor while hoping between the different scenes
     static bool IsInCorrectLevel()
     {
-        return UnityEditor.SceneManagement.EditorSceneManager.GetActiveScene().name.Contains("level");
+        return UnityEditor.SceneManagement.EditorSceneManager.GetActiveScene().name.Contains("Level");
     }
 }

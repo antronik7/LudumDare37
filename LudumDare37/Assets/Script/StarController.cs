@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class StarController : MonoBehaviour {
-    private GameObject lockKey;
-    private GameObject exitDoor;
+
+    public AudioClip starSound;
 
     void Start()
     {
@@ -13,6 +13,7 @@ public class StarController : MonoBehaviour {
     {
         if (col.gameObject.tag == "Player")
         {
+            GetComponent<AudioSource>().PlayOneShot(starSound, 1f);
             Rewinder.gotStar();
             this.gameObject.SetActive(false);
         }

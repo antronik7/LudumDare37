@@ -28,7 +28,7 @@ public class OneRoomController : MonoBehaviour {
     void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
         step = speed * Time.deltaTime;
-        
+        spawn = (FindObjectOfType(typeof(SpawnController)) as SpawnController).gameObject;
     }
 	
 	// Update is called once per frame

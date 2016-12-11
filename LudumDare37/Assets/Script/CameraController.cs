@@ -55,7 +55,7 @@ public class CameraController : MonoBehaviour
         {
             GetComponent<Camera>().orthographicSize = GetComponent<Camera>().orthographicSize + 2 * Time.deltaTime;
             Vector3 screenPoint = GetComponent<Camera>().WorldToViewportPoint(ExitController.instance.transform.position);
-            bool onScreen = screenPoint.z > 0 && screenPoint.x > -0.1 && screenPoint.x < 0.9 && screenPoint.y > -0.1 && screenPoint.y < 0.9;
+            bool onScreen = screenPoint.z > 0 && screenPoint.x > 0.1 && screenPoint.x < 0.9 && screenPoint.y > 0.1 && screenPoint.y < 0.9;
             if (onScreen)
             {
                 if (StarController.instance == null)

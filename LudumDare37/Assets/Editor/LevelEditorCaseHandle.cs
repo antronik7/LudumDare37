@@ -23,7 +23,7 @@ public class LevelEditorCaseHandle : Editor {
     }
     static void OnSceneGUI(SceneView sceneView)
     {
-        if (!UnityEditor.SceneManagement.EditorSceneManager.GetActiveScene().name.Contains("level"))
+        if (!UnityEditor.SceneManagement.EditorSceneManager.GetActiveScene().name.Contains("Level"))
         {
             return;
         }
@@ -44,11 +44,13 @@ public class LevelEditorCaseHandle : Editor {
             return;
         }
 
+
         UpdateHandlePosition();
         UpdateIsMouseInValidArea(sceneView.position);
         UpdateRepaint();
 
         DrawCubeDrawPreview();
+
     }
     static void UpdateIsMouseInValidArea(Rect sceneViewRect)
     {

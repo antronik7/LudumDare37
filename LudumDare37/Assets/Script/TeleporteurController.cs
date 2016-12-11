@@ -7,14 +7,21 @@ public class TeleporteurController : MonoBehaviour {
     public GameObject SortieWrap;
 	[HideInInspector]public static bool canTeleport = true;
 
+    public AudioClip teleportationSound;
+
+
     void OnTriggerEnter2D(Collider2D other)
     {
-		if ((other.tag == "Player") && (canTeleport)) {
-			Player = other.gameObject;
+		if ((other.tag == "Player") && (canTeleport))
+        {
+            GetComponent<AudioSource>().PlayOneShot(teleportationSound, 1f);
+            Player = other.gameObject;
 			canTeleport = false;
 			Player.transform.position = SortieWrap.transform.position;
-		} else if ((other.tag == "Player") && (!canTeleport)) {
-			StartCoroutine(waitBeforeCanTeleport());
+		} else if ((other.tag == "Player") && (!canTeleport))
+        {
+            GetComponent<AudioSource>().PlayOneShot(teleportationSound, 1f);
+            StartCoroutine(waitBeforeCanTeleport());
 		}
     }
 

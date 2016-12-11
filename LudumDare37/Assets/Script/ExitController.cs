@@ -9,8 +9,11 @@ public class ExitController : MonoBehaviour {
 	public void setIsKey(bool val){isKey = val;}
 	public bool getIsKey(){return isKey;}
 
-	// Use this for initialization
-	void Start () {
+    public AudioClip exitSound;
+
+
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -27,6 +30,7 @@ public class ExitController : MonoBehaviour {
 			return;
         if(other.tag == "Player")
         {
+            GetComponent<AudioSource>().PlayOneShot(exitSound, 1f);
             StartCoroutine(LoadLevelCoroutine());
         }
     }

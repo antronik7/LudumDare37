@@ -5,8 +5,10 @@ public class KeyLockController : MonoBehaviour {
 
    	private GameObject lockKey;
 	private GameObject exitDoor;
+    public AudioClip unlockSound;
 
-	void Start () {
+
+    void Start () {
 		exitDoor = transform.parent.parent.gameObject;
 		lockKey = this.transform.parent.gameObject;
 		lockKey.transform.position = exitDoor.transform.position;
@@ -14,7 +16,9 @@ public class KeyLockController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col) {
-		if (col.gameObject.tag == "Player") {
+		if (col.gameObject.tag == "Player")
+        {
+            GetComponent<AudioSource>().PlayOneShot(unlockSound, 1f);
             Rewinder.gotKey();
 			exitDoor.GetComponent<ExitController> ().setIsKey (false);
 			lockKey.SetActive (false);

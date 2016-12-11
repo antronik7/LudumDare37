@@ -19,14 +19,17 @@ public class Rewinder : MonoBehaviour {
 
     public static void addTranslation(Vector3 playerPos, Vector3 roomPos)
     {
+        Scorer.instance.addScoreValue(2, 1);
         listState.Push(new RewindInfo(playerPos, 0, roomPos));
     }
     public static void addRotation(Vector3 playerPos, int dir)
     {
+        Scorer.instance.addScoreValue(2, 1);
         listState.Push(new RewindInfo(playerPos, 1, dir));
     }
     public static void addSymetrie(Vector3 playerPos)
     {
+        Scorer.instance.addScoreValue(2, 1);
         listState.Push(new RewindInfo(playerPos, 2));
     }
 
@@ -50,6 +53,7 @@ public class Rewinder : MonoBehaviour {
     {
         if(listState.Count != 0)
         {
+            Scorer.instance.addScoreValue(2, -1);
             listState.Pop().rewind();
         }
     }

@@ -19,6 +19,10 @@ public class GroundCheck : MonoBehaviour {
     {
         if (other.gameObject.tag == "ground" || other.gameObject.tag == "movingPlatform")
         {
+            if (!parent.IsGround)
+            {
+                //AudioController.instance.playClip(1);fout la merde
+            }
             parent.IsGround = true;
         }
     }
@@ -27,6 +31,9 @@ public class GroundCheck : MonoBehaviour {
     {
         if (other.gameObject.tag == "movingPlatform")
         {
+            /*
+            Debug.Log(2);
+            AudioController.instance.playClip(1);*/
             parent.IsGround = true;
 
             if(parent.canIMove())

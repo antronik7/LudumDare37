@@ -9,9 +9,6 @@ public class ExitController : MonoBehaviour {
 	public void setIsKey(bool val){isKey = val;}
 	public bool getIsKey(){return isKey;}
 
-    public AudioClip exitSound;
-
-
     // Use this for initialization
     void Start () {
 	
@@ -34,7 +31,7 @@ public class ExitController : MonoBehaviour {
             Scorer.instance.addScoreValue(0, levelNumber);
 
             LevelController.instance.setLevelScore();
-            GetComponent<AudioSource>().PlayOneShot(exitSound, 1f);
+            AudioController.instance.playClip(13);
             StartCoroutine(LoadLevelCoroutine());
         }
     }

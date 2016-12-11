@@ -5,24 +5,113 @@ public class CameraController : MonoBehaviour
 {
 
     public GameObject OneRoom;
+    GameObject player;
+
     private OneRoomController roomController;
+
 
     private float normalSizeRoom;
     public float rotateSizeRoom;
+
+    public float distanceDezoomAction;
+    public float speedDeZoomAction;
+    public float speedZoomAction;
+    public float speedZoomTransition;
+    public bool faitZoom = false;
+    public bool faitDezoom = false;
+    public bool faitZoomTrans = false;
+    PlayerController playerController;
+
+    bool entrainDeZoomer = false;
 
 
     private int init;
     private float initDistance;
 
+
+
+
+    //variable pour translation
+    Vector3 positionDebutTransition;
+    public float distanceEntreCameraEtRoom;
+
     void Start()
     {
         roomController = OneRoom.GetComponent<OneRoomController>();
         normalSizeRoom = GetComponent<Camera>().orthographicSize;
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerController = player.GetComponent<PlayerController>();
     }
 
     void Update()
     {
-       		transform.position = new Vector3(OneRoom.transform.position.x, OneRoom.transform.position.y, transform.position.z);
+        if(faitZoom)
+        {
+            
+
+            GetComponent<Camera>().orthographicSize = GetComponent<Camera>().orthographicSize - speedZoomAction * Time.deltaTime;
+
+            
+            if (GetComponent<Camera>().orthographicSize < normalSizeRoom)
+            {
+                faitZoom = false;
+
+                GetComponent<Camera>().orthographicSize = normalSizeRoom;
+
+                entrainDeZoomer = false;
+            }
+        }
+        else if (faitDezoom)
+        {
+            entrainDeZoomer = true;
+
+            GetComponent<Camera>().orthographicSize = GetComponent<Camera>().orthographicSize + speedDeZoomAction * Time.deltaTime;
+            
+
+            if (GetComponent<Camera>().orthographicSize > normalSizeRoom + distanceDezoomAction)
+            {
+                
+                faitDezoom = false;
+
+                GetComponent<Camera>().orthographicSize = normalSizeRoom + distanceDezoomAction;
+
+                if(playerController.getActionPlayer() == 1)
+                {
+                    roomController.OneRoomTranslation(playerController.getPosition());
+
+                }
+                else if (playerController.getActionPlayer() == 2)
+                {
+                    roomController.OneRoomRotation(playerController.getDirection());
+                }
+                else
+                {
+                    roomController.OneRoomSymetrie();
+                }
+            }
+        }
+        else if(faitZoomTrans)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3 (OneRoom.transform.position.x, OneRoom.transform.position.y, -10f), speedZoomTransition * Time.deltaTime);
+
+            float pourcentage = (distanceEntreCameraEtRoom - Vector2.Distance(transform.position, OneRoom.transform.position)) / distanceEntreCameraEtRoom;
+
+            Debug.Log(pourcentage);
+
+            GetComponent<Camera>().orthographicSize = ((normalSizeRoom + distanceDezoomAction) - ((distanceDezoomAction) * pourcentage));
+
+            if(transform.position == new Vector3(OneRoom.transform.position.x, OneRoom.transform.position.y, -10f))
+            {
+                faitZoomTrans = false;
+
+                GetComponent<Camera>().orthographicSize = normalSizeRoom;
+
+                entrainDeZoomer = false;
+            }
+        }
+
+        //transform.position = new Vector3(OneRoom.transform.position.x, OneRoom.transform.position.y, transform.position.z);
 
         /*if (roomController.getIsTranslating())
         {
@@ -89,11 +178,14 @@ public class CameraController : MonoBehaviour
 
     public void resetCamera()
     {
-        if (gameObject.GetComponent<Camera>().orthographicSize > normalSizeRoom)
+        if(entrainDeZoomer == false)
         {
-            GetComponent<Camera>().orthographicSize = GetComponent<Camera>().orthographicSize - 5 * Time.deltaTime;
+            if (gameObject.GetComponent<Camera>().orthographicSize > normalSizeRoom)
+            {
+                GetComponent<Camera>().orthographicSize = GetComponent<Camera>().orthographicSize - 5 * Time.deltaTime;
+            }
+            isMaxSize = false;
         }
-        isMaxSize = false;
     }
 
     private static CameraController s_Instance = null;
@@ -121,5 +213,10 @@ public class CameraController : MonoBehaviour
 
             return s_Instance;
         }
+    }
+
+    public void zoomTrans()
+    {
+
     }
 }

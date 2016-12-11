@@ -93,10 +93,17 @@ public class PlayerController : MonoBehaviour {
             StartCoroutine(WaitForRotation(-1));
         }
 
-
         if (Input.GetButtonDown("Rewind"))
         {
             Rewinder.rewind();
+        }
+        if (Input.GetButton("UnzoomCamera"))
+        {
+            CameraController.instance.unzoomCamera();
+        }
+        else
+        {
+            CameraController.instance.resetCamera();
         }
     }
 

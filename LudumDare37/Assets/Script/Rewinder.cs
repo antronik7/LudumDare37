@@ -4,11 +4,17 @@ using System.Collections.Generic;
 
 public class Rewinder : MonoBehaviour {
     static Stack<RewindInfo> listState;
-    public GameObject OneRoom;
+    GameObject OneRoom;
+
+    public static KeyLockController keyLockController;
+    public static StarController starController;
 
     void Awake()
     {
         listState = new Stack<RewindInfo>();
+        OneRoom = GameObject.FindGameObjectWithTag("Room");
+        keyLockController = KeyLockController.instance;
+        starController = StarController.instance;
     }
 
     public static void addTranslation(Vector3 playerPos, Vector3 roomPos)
@@ -24,9 +30,28 @@ public class Rewinder : MonoBehaviour {
         listState.Push(new RewindInfo(playerPos, 2));
     }
 
+    public static void gotKey()
+    {
+        if(listState.Count != 0)
+        {
+            listState.Peek().setKey();
+        }
+    }
+
+    public static void gotStar()
+    {
+        if (listState.Count != 0)
+        {
+            listState.Peek().setStar();
+        }
+    }
+
     public static void rewind()
     {
-        listState.Pop().rewind();
+        if(listState.Count != 0)
+        {
+            listState.Pop().rewind();
+        }
     }
 }
 

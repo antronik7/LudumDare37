@@ -50,25 +50,46 @@ public class OneRoomController : MonoBehaviour {
 
         if(DoSymetrie)
         {
-            if(ScaleTarget < 0)
+            if(transform.rotation.eulerAngles.z == 270 || transform.rotation.eulerAngles.z == 90)
             {
-                transform.localScale = new Vector3(transform.localScale.x - Time.deltaTime * speedSymetrie, transform.localScale.y, transform.localScale.z);
+                if (ScaleTarget < 0)
+                {
+                    transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y - Time.deltaTime * speedSymetrie, transform.localScale.z);
+                }
+                else
+                {
+                    transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y + Time.deltaTime * speedSymetrie, transform.localScale.z);
+                }
+
+                if (Mathf.Abs(transform.localScale.y) > Mathf.Abs(ScaleTarget))
+                {
+                    DoSymetrie = false;
+                    transform.localScale = new Vector3(transform.localScale.x, ScaleTarget, transform.localScale.z);
+                    player.transform.parent = null;
+                    player.GetComponent<PlayerController>().resetPhysic();
+                }
             }
             else
             {
-                transform.localScale = new Vector3(transform.localScale.x + Time.deltaTime * speedSymetrie, transform.localScale.y, transform.localScale.z);
-            }
+                if (ScaleTarget < 0)
+                {
+                    transform.localScale = new Vector3(transform.localScale.x - Time.deltaTime * speedSymetrie, transform.localScale.y, transform.localScale.z);
+                }
+                else
+                {
+                    transform.localScale = new Vector3(transform.localScale.x + Time.deltaTime * speedSymetrie, transform.localScale.y, transform.localScale.z);
+                }
 
-            print(Mathf.Abs(transform.localScale.x));
-            print(Mathf.Abs(ScaleTarget));
-
-            if (Mathf.Abs(transform.localScale.x) > Mathf.Abs(ScaleTarget))
-            {
-                DoSymetrie = false;
-                transform.localScale = new Vector3(ScaleTarget - Time.deltaTime * speedSymetrie, transform.localScale.y, transform.localScale.z);
-                player.transform.parent = null;
-                player.GetComponent<PlayerController>().resetPhysic();
+                if (Mathf.Abs(transform.localScale.x) > Mathf.Abs(ScaleTarget))
+                {
+                    DoSymetrie = false;
+                    Debug.Log(ScaleTarget);
+                    transform.localScale = new Vector3(ScaleTarget, transform.localScale.y, transform.localScale.z);
+                    player.transform.parent = null;
+                    player.GetComponent<PlayerController>().resetPhysic();
+                }
             }
+            
         }
 
         if(DoRotation)
@@ -167,8 +188,15 @@ public class OneRoomController : MonoBehaviour {
     public void OneRoomSymetrie()
     {
         Rewinder.addSymetrie(player.transform.position);
-        ScaleTarget = transform.localScale.x * -1;
-        DoSymetrie = true;
+        if (transform.rotation.eulerAngles.z == 270 || transform.rotation.eulerAngles.z == 90)
+        {
+            ScaleTarget = (int)transform.localScale.y * -1;
+        }
+        else
+        {
+            ScaleTarget = (int)transform.localScale.x * -1;
+        }
+                DoSymetrie = true;
     }
 
     public void OneRoomRotation(int dir)

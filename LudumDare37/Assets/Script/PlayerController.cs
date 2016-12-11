@@ -19,15 +19,6 @@ public class PlayerController : MonoBehaviour {
 
 	private float baseGravityScale;
 
-    public AudioClip jumpSound;
-    public AudioClip translationSound;
-    public AudioClip rotationSound;
-    public AudioClip symetrieSound;
-
-    public AudioClip rewindTranslationSound;
-    public AudioClip rewindRotationSound;
-    public AudioClip rewindSymetrieSound;
-
     void Start () {
         rBody = GetComponent<Rigidbody2D>();
 		baseGravityScale = rBody.gravityScale;
@@ -47,7 +38,7 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetButtonDown("Jump"))
             {
-                GetComponent<AudioSource>().PlayOneShot(jumpSound, 1f);
+                AudioController.instance.playClip(0);
                 rBody.velocity = new Vector2(rBody.velocity.x, j_force);
 
                 IsGround = false;
@@ -68,7 +59,7 @@ public class PlayerController : MonoBehaviour {
             {
                 if (Input.GetButtonDown("Jump"))
                 {
-                    GetComponent<AudioSource>().PlayOneShot(jumpSound, 1f);
+                    AudioController.instance.playClip(0);
                     rBody.velocity = new Vector2(rBody.velocity.x, j_force);
 
                     IsGround = false;
@@ -81,7 +72,7 @@ public class PlayerController : MonoBehaviour {
                 {
                     RessourceManager.instance.NbrTranslation--;
 
-                    GetComponent<AudioSource>().PlayOneShot(translationSound, 1f);
+                    AudioController.instance.playClip(2);
 
                     boxCollider.enabled = false;
                     rBody.gravityScale = 0;
@@ -98,7 +89,7 @@ public class PlayerController : MonoBehaviour {
                 {
                     RessourceManager.instance.NbrRotation--;
 
-                    GetComponent<AudioSource>().PlayOneShot(rotationSound, 1f);
+                    AudioController.instance.playClip(4);
 
                     boxCollider.enabled = false;
                     rBody.gravityScale = 0;
@@ -116,7 +107,7 @@ public class PlayerController : MonoBehaviour {
                 {
                     RessourceManager.instance.NbrRotation--;
 
-                    GetComponent<AudioSource>().PlayOneShot(rotationSound, 1f);
+                    AudioController.instance.playClip(4);
 
                     boxCollider.enabled = false;
                     rBody.gravityScale = 0;
@@ -133,7 +124,7 @@ public class PlayerController : MonoBehaviour {
                 {
                     RessourceManager.instance.NbrSymetrie--;
 
-                    GetComponent<AudioSource>().PlayOneShot(symetrieSound, 1f);
+                    AudioController.instance.playClip(6);
 
                     boxCollider.enabled = false;
                     rBody.gravityScale = 0;

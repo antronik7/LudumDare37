@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class HookController : MonoBehaviour {
-    public AudioClip hookSound;
 
     // Use this for initialization
     void Start () {
@@ -19,7 +18,7 @@ public class HookController : MonoBehaviour {
         
         if(other.tag == "Player")
         {
-            GetComponent<AudioSource>().PlayOneShot(hookSound, 1f);
+            AudioController.instance.playClip(10);
             AttractPlayer(other);
             other.GetComponent<PlayerController>().hook = transform;
             other.GetComponent<PlayerController>().isHooked = true;

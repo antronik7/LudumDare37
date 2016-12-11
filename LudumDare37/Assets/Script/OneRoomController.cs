@@ -169,6 +169,8 @@ public class OneRoomController : MonoBehaviour {
 
     public void OneRoomRotation(int dir)
     {
+        Rewinder.addRotation(player.transform.position, dir);
+
         GetComponent<Rigidbody2D>().angularVelocity = speedRotation * dir;
         //player.GetComponent<Rigidbody2D>().angularVelocity = (speedRotation * 100) * dir * -1;
 
@@ -203,6 +205,18 @@ public class OneRoomController : MonoBehaviour {
     public void moveTo(Vector3 roomPosition)
     {
         gameObject.transform.position = roomPosition;
+    }
+
+    public void rotateTo(int dir)
+    {
+        if (dir > 0)
+        {
+            transform.eulerAngles = new Vector3(0, 0, transform.rotation.eulerAngles.z-90);
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(0, 0, transform.rotation.eulerAngles.z+90);
+        }
     }
 
     private static OneRoomController s_Instance = null;

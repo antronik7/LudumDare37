@@ -43,6 +43,14 @@ public class RewindInfo
                 OneRoomController.instance.moveTo(this.roomPos);
                 PlayerController.instance.moveTo(this.playerPos);
                 break;
+            case 1:
+                OneRoomController.instance.rotateTo(dir);
+                PlayerController.instance.moveTo(this.playerPos);
+                break;
+            case 2:
+                OneRoomController.instance.moveTo(this.roomPos);
+                PlayerController.instance.moveTo(this.playerPos);
+                break;
             default:
                 break;
         }

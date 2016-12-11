@@ -173,6 +173,18 @@ public class OneRoomController : MonoBehaviour {
         gameObject.transform.position = roomPosition;
     }
 
+    public void rotateTo(int dir)
+    {
+        if (dir > 0)
+        {
+            transform.eulerAngles = new Vector3(0, 0, transform.rotation.eulerAngles.z-90);
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(0, 0, transform.rotation.eulerAngles.z+90);
+        }
+    }
+
     private static OneRoomController s_Instance = null;
 
     // This defines a static instance property that attempts to find the manager object in the scene and

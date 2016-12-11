@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour {
                 }
             }
 
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Translation"))
             {
                 GetComponent<AudioSource>().PlayOneShot(translationSound, 1f);
 
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour {
                 OneRoom.GetComponent<OneRoomController>().OneRoomTranslation(transform.position);
             }
 
-            if (Input.GetAxis("Fire2") > 0.1)
+            if (Input.GetAxis("RotGauche") > 0.1)
             {
                 GetComponent<AudioSource>().PlayOneShot(rotationSound, 1f);
 
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour {
                 StartCoroutine(WaitForRotation(1));
             }
 
-            if (Input.GetAxis("Fire3") > 0.1)
+            if (Input.GetAxis("RotDroite") > 0.1)
             {
                 GetComponent<AudioSource>().PlayOneShot(rotationSound, 1f);
 
@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour {
                 StartCoroutine(WaitForRotation(-1));
             }
 
-            if (Input.GetButtonDown("Fire4"))
+            if (Input.GetButtonDown("Symetrie"))
             {
                 GetComponent<AudioSource>().PlayOneShot(symetrieSound, 1f);
 

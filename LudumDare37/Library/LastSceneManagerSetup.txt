@@ -1,12 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/Menu.unity
-=======
-<<<<<<< HEAD
-- path: Assets/Scenes/mainAntoine.unity
-=======
 - path: Assets/Scenes/Level1.unity
->>>>>>> 7fd45feb0a4701e7afd40d15cb424ad4512185fe
->>>>>>> 9c4ada97e44f1442d78eff66357dd19da0f8a295
   isLoaded: 1
   isActive: 1

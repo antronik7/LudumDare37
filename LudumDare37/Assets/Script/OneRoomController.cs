@@ -3,18 +3,21 @@ using System.Collections;
 
 public class OneRoomController : MonoBehaviour {
 
-    public float speed;
     private GameObject player;
+    public float speed;
     public float speedRotation;
+    public float speedSymetrie;
     public GameObject spawn;
 
     Vector3 offset;
     bool DoTranslation = false;
     bool DoRotation = false;
+    bool DoSymetrie = false;
     float angleInitial;
     float anglePrecedent;
     int direction;
     float transitionInitialDistancePlayerSpawn = 0;
+    float ScaleTarget;
 
     float step;
     Vector3 target;
@@ -23,7 +26,7 @@ public class OneRoomController : MonoBehaviour {
     void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
         step = speed * Time.deltaTime;
-        offset = transform.position - spawn.transform.position;
+        
     }
 	
 	// Update is called once per frame
@@ -41,6 +44,29 @@ public class OneRoomController : MonoBehaviour {
             {
                 DoTranslation = false;
 
+                player.GetComponent<PlayerController>().resetPhysic();
+            }
+        }
+
+        if(DoSymetrie)
+        {
+            if(ScaleTarget < 0)
+            {
+                transform.localScale = new Vector3(transform.localScale.x - Time.deltaTime * speedSymetrie, transform.localScale.y, transform.localScale.z);
+            }
+            else
+            {
+                transform.localScale = new Vector3(transform.localScale.x + Time.deltaTime * speedSymetrie, transform.localScale.y, transform.localScale.z);
+            }
+
+            print(Mathf.Abs(transform.localScale.x));
+            print(Mathf.Abs(ScaleTarget));
+
+            if (Mathf.Abs(transform.localScale.x) > Mathf.Abs(ScaleTarget))
+            {
+                DoSymetrie = false;
+                transform.localScale = new Vector3(ScaleTarget - Time.deltaTime * speedSymetrie, transform.localScale.y, transform.localScale.z);
+                player.transform.parent = null;
                 player.GetComponent<PlayerController>().resetPhysic();
             }
         }
@@ -130,9 +156,18 @@ public class OneRoomController : MonoBehaviour {
     public void OneRoomTranslation(Vector3 position)
     {
         Rewinder.addTranslation(position, gameObject.transform.position);
+
+        offset = transform.position - spawn.transform.position;
+
         target = position + offset;
 
         DoTranslation = true;
+    }
+
+    public void OneRoomSymetrie()
+    {
+        ScaleTarget = transform.localScale.x * -1;
+        DoSymetrie = true;
     }
 
     public void OneRoomRotation(int dir)

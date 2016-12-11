@@ -49,53 +49,72 @@ public class PlayerController : MonoBehaviour {
         {
             float move = Input.GetAxisRaw("Horizontal");
             rBody.velocity = new Vector2(move * m_speed, rBody.velocity.y);
-        }
 
-        if (IsGround)
-        {
-            if (Input.GetButtonDown("Jump"))
+            if (IsGround)
             {
-                rBody.velocity = new Vector2(rBody.velocity.x, j_force);
+                if (Input.GetButtonDown("Jump"))
+                {
+                    rBody.velocity = new Vector2(rBody.velocity.x, j_force);
 
-                IsGround = false;
+                    IsGround = false;
+                }
             }
-        }
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            boxCollider.enabled = false;
-            rBody.gravityScale = 0;
-            rBody.velocity = new Vector2(0, 0);
-            CanMove = false;
-            
-            OneRoom.GetComponent<OneRoomController>().OneRoomTranslation(transform.position);
-        }
+            if (Input.GetButtonDown("Fire1"))
+            {
+                boxCollider.enabled = false;
+                rBody.gravityScale = 0;
+                rBody.velocity = new Vector2(0, 0);
+                CanMove = false;
 
-        if (Input.GetButtonDown("Fire2"))
-        {
-            boxCollider.enabled = false;
-            rBody.gravityScale = 0;
-            rBody.velocity = new Vector2(0, 0);
-            CanMove = false;
-            rBody.constraints = RigidbodyConstraints2D.None;
+                OneRoom.GetComponent<OneRoomController>().OneRoomTranslation(transform.position);
+            }
 
-            StartCoroutine(WaitForRotation(1));
-        }
+            if (Input.GetAxis("Fire2") > 0.1)
+            {
+                boxCollider.enabled = false;
+                rBody.gravityScale = 0;
+                rBody.velocity = new Vector2(0, 0);
+                CanMove = false;
+                rBody.constraints = RigidbodyConstraints2D.None;
 
-        if (Input.GetButtonDown("Fire3"))
-        {
-            boxCollider.enabled = false;
-            rBody.gravityScale = 0;
-            rBody.velocity = new Vector2(0, 0);
-            CanMove = false;
-            rBody.constraints = RigidbodyConstraints2D.None;
+                StartCoroutine(WaitForRotation(1));
+            }
 
-            StartCoroutine(WaitForRotation(-1));
-        }
+            if (Input.GetAxis("Fire3") > 0.1)
+            {
+                boxCollider.enabled = false;
+                rBody.gravityScale = 0;
+                rBody.velocity = new Vector2(0, 0);
+                CanMove = false;
+                rBody.constraints = RigidbodyConstraints2D.None;
 
+<<<<<<< HEAD
         if (Input.GetButtonDown("Rewind"))
         {
             Rewinder.rewind();
+=======
+                StartCoroutine(WaitForRotation(-1));
+            }
+
+            if (Input.GetButtonDown("Fire4"))
+            {
+                boxCollider.enabled = false;
+                rBody.gravityScale = 0;
+                rBody.velocity = new Vector2(0, 0);
+                CanMove = false;
+
+                transform.parent = OneRoom.transform;
+
+                OneRoom.GetComponent<OneRoomController>().OneRoomSymetrie();
+            }
+
+
+            if (Input.GetButtonDown("Rewind"))
+            {
+                Rewinder.rewind();
+            }
+>>>>>>> 6f342851f77ed792846425e670a922483a79831b
         }
         if (Input.GetButton("UnzoomCamera"))
         {

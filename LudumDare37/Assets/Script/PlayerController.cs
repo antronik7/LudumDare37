@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour {
                 StartCoroutine(WaitForRotation(1));
             }
 
-            if (Input.GetAxis("RotDroite") > 0.1)
+			if (Input.GetAxis("RotDroite") > 0.1)
             {
                 GetComponent<AudioSource>().PlayOneShot(rotationSound, 1f);
 

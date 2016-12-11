@@ -19,7 +19,14 @@ public class PlayerController : MonoBehaviour {
 
 	private float baseGravityScale;
 
+	private Animator animManager;
+
+	private bool isSymetrie=false;
+
+	public bool test;
+
     void Start () {
+		animManager = GetComponent<Animator> ();
         rBody = GetComponent<Rigidbody2D>();
 		baseGravityScale = rBody.gravityScale;
         boxCollider = GetComponent<BoxCollider2D>();
@@ -40,18 +47,41 @@ public class PlayerController : MonoBehaviour {
             {
                 AudioController.instance.playClip(0);
                 rBody.velocity = new Vector2(rBody.velocity.x, j_force);
+				animManager.SetBool ("isJumping", true);
 
                 IsGround = false;
                 isHooked = false;
                 hook = null;
             }
         }
+		if ((rBody.velocity.y < 0)&&(!IsGround)) {
+			animManager.SetBool ("isFalling", true);
+		} else if (IsGround) {
+			animManager.SetBool ("isFalling", false);
+			animManager.SetBool ("isJumping", false);
+		}
 
         if (CanMove)
         {
             if(!isHooked)
             {
                 float move = Input.GetAxisRaw("Horizontal");
+				if (move == 0) {
+					animManager.SetBool ("isWalking", false);
+				} else {
+					if (move < 0) {
+						if(!isSymetrie)
+							GetComponent<SpriteRenderer> ().flipX = true;
+						else
+							GetComponent<SpriteRenderer> ().flipX = false;
+					} else {
+						if(!isSymetrie)
+							GetComponent<SpriteRenderer> ().flipX = false;
+						else
+							GetComponent<SpriteRenderer> ().flipX = true;
+					}
+					animManager.SetBool ("isWalking", true);
+				}
                 rBody.velocity = new Vector2(move * m_speed, rBody.velocity.y);
             }
             
@@ -61,7 +91,7 @@ public class PlayerController : MonoBehaviour {
                 {
                     AudioController.instance.playClip(0);
                     rBody.velocity = new Vector2(rBody.velocity.x, j_force);
-
+					animManager.SetBool ("isJumping", true);
                     IsGround = false;
                 }
             }
@@ -101,7 +131,7 @@ public class PlayerController : MonoBehaviour {
                 }
             }
 
-			if (Input.GetAxis("RotDroite") > 0.1)
+			if ((Input.GetAxis("RotDroite") > 0.1)||(test))
             {
                 if(RessourceManager.instance.NbrRotation > 0)
                 {
@@ -116,6 +146,7 @@ public class PlayerController : MonoBehaviour {
                     rBody.constraints = RigidbodyConstraints2D.None;
                     StartCoroutine(WaitForRotation(-1));
                 }   
+				test=false;
             }
 
             if (Input.GetButtonDown("Symetrie"))
@@ -130,6 +161,9 @@ public class PlayerController : MonoBehaviour {
                     rBody.gravityScale = 0;
                     rBody.velocity = new Vector2(0, 0);
                     CanMove = false;
+
+					isSymetrie = !isSymetrie;
+					GetComponent<SpriteRenderer> ().flipX = !GetComponent<SpriteRenderer> ().flipX;
 
                     transform.parent = OneRoom.transform;
 

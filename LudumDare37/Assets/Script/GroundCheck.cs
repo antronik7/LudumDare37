@@ -32,8 +32,8 @@ public class GroundCheck : MonoBehaviour {
         if (other.gameObject.tag == "movingPlatform")
         {
             /*
-            Debug.Log(2);
-            AudioController.instance.playClip(1);*/
+            Debug.Log(2);*/
+          //  AudioController.instance.playClip(1);
             parent.IsGround = true;
 
             if(parent.canIMove())

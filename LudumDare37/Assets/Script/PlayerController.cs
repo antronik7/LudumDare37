@@ -77,8 +77,9 @@ public class PlayerController : MonoBehaviour {
             rBody.gravityScale = 0;
             rBody.velocity = new Vector2(0, 0);
             CanMove = false;
+            rBody.constraints = RigidbodyConstraints2D.None;
 
-            OneRoom.GetComponent<OneRoomController>().OneRoomRotation(1);
+            StartCoroutine(WaitForRotation(1));
         }
 
         if (Input.GetButtonDown("Fire3"))
@@ -87,8 +88,9 @@ public class PlayerController : MonoBehaviour {
             rBody.gravityScale = 0;
             rBody.velocity = new Vector2(0, 0);
             CanMove = false;
+            rBody.constraints = RigidbodyConstraints2D.None;
 
-            OneRoom.GetComponent<OneRoomController>().OneRoomRotation(-1);
+            StartCoroutine(WaitForRotation(-1));
         }
 
 
@@ -109,7 +111,15 @@ public class PlayerController : MonoBehaviour {
         boxCollider.enabled = true;
         rBody.gravityScale = baseGravityScale;
         rBody.velocity = new Vector2(0, 0);
+        rBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         CanMove = true;
+    }
+
+    IEnumerator WaitForRotation(int direction)
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        OneRoom.GetComponent<OneRoomController>().OneRoomRotation(direction);
     }
 
     private static PlayerController s_Instance = null;

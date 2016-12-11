@@ -17,9 +17,22 @@ public class GroundCheck : MonoBehaviour {
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.tag == "ground")
+        if (other.gameObject.tag == "ground" || other.gameObject.tag == "movingPlatform")
         {
-            parent.GetComponent<PlayerController>().IsGround = true;
+            parent.IsGround = true;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "movingPlatform")
+        {
+            parent.IsGround = true;
+
+            if(parent.canIMove())
+            {
+                parent.transform.parent = other.transform;
+            }
         }
     }
 
@@ -27,7 +40,16 @@ public class GroundCheck : MonoBehaviour {
     {
         if (other.gameObject.tag == "ground")
         {
-            parent.GetComponent<PlayerController>().IsGround = false;
+            parent.IsGround = false;
+        }
+        else if (other.gameObject.tag == "movingPlatform")
+        {
+            parent.IsGround = false;
+
+            if (parent.canIMove())
+            {
+                parent.transform.parent = null;
+            }
         }
     }
 }

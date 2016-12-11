@@ -23,6 +23,7 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         //transform.position = new Vector3(OneRoom.transform.position.x, OneRoom.transform.position.y, transform.position.z);
+
         if (roomController.getIsTranslating())
         {
 

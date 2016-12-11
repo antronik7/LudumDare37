@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class pauseInterface : MonoBehaviour {
 
     public GameObject menuPanel;
+    public Button firstButton;
+
+
     public void closeGame()
     {
         Application.Quit();
@@ -22,7 +27,16 @@ public class pauseInterface : MonoBehaviour {
 
     public void swapMenuPanel()
     {
-        menuPanel.SetActive(!menuPanel.activeSelf);
+        if (menuPanel.activeSelf)
+        {
+            menuPanel.SetActive(false);
+        }
+        else
+        {
+            menuPanel.SetActive(true);
+            firstButton.Select();
+        }
+
     }
 
     private static pauseInterface s_Instance = null;

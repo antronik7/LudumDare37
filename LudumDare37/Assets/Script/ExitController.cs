@@ -30,6 +30,10 @@ public class ExitController : MonoBehaviour {
 			return;
         if(other.tag == "Player")
         {
+            float levelNumber = float.Parse(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Substring(5, 1));
+            Scorer.instance.addScoreValue(0, levelNumber);
+
+            LevelController.instance.setLevelScore();
             GetComponent<AudioSource>().PlayOneShot(exitSound, 1f);
             StartCoroutine(LoadLevelCoroutine());
         }

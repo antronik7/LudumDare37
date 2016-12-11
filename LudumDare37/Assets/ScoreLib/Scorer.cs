@@ -129,6 +129,21 @@ public class Scorer : MonoBehaviour {
         PlayerPrefs.SetFloat("Score_id_" + idScore, scoresScriptableObject.scores[idScore].addScore(value));
     }
 
+    public void addScoreValue(string scoreName, float value)
+    {
+        int idScore = scoresScriptableObject.scores.FindIndex(score => score.name == scoreName);
+        addScoreValue(idScore, value);
+    }
+
+    public float getScoreValue(int idScore)
+    {
+        return scoresScriptableObject.scores[idScore].value;
+    }
+    public float getScoreValue(string scoreName)
+    {
+        return scoresScriptableObject.scores.Find(score => score.name == scoreName).value;
+    }
+
     public string[] getNames(out int[] originPos)
     {
         List<string> names = new List<string>();
@@ -207,6 +222,7 @@ public class Scorer : MonoBehaviour {
             // If it is still null, create a new instance
             if (s_Instance == null)
             {
+                return null;
                 GameObject obj = new GameObject("AManager");
                 s_Instance = obj.AddComponent(typeof(Scorer)) as Scorer;
             }

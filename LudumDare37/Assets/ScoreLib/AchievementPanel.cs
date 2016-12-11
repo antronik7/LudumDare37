@@ -36,6 +36,8 @@ public class AchievementPanel : MonoBehaviour {
             // If it is still null, create a new instance
             if (s_Instance == null)
             {
+                return null;
+
                 GameObject obj = new GameObject("AManager");
                 s_Instance = obj.AddComponent(typeof(AchievementPanel)) as AchievementPanel;
             }

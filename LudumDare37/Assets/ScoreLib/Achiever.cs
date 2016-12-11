@@ -152,6 +152,7 @@ public class Achiever : MonoBehaviour{
             // If it is still null, create a new instance
             if (s_Instance == null)
             {
+                return null;
                 GameObject obj = new GameObject("AManager");
                 s_Instance = obj.AddComponent(typeof(Achiever)) as Achiever;
             }

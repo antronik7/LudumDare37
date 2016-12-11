@@ -42,7 +42,6 @@ public class OneRoomController : MonoBehaviour {
                 DoTranslation = false;
 
                 player.GetComponent<PlayerController>().resetPhysic();
-                player.transform.parent = transform;
             }
         }
 
@@ -169,11 +168,6 @@ public class OneRoomController : MonoBehaviour {
         return transitionInitialDistancePlayerSpawn;
     }
 
-<<<<<<< HEAD
-    void finirRotation()
-    {
-
-=======
     public void moveTo(Vector3 roomPosition)
     {
         gameObject.transform.position = roomPosition;
@@ -203,6 +197,5 @@ public class OneRoomController : MonoBehaviour {
 
             return s_Instance;
         }
->>>>>>> 0914ba615314c0bf39b536b36d3d23a98a5c450b
     }
 }

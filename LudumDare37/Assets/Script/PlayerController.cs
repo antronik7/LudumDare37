@@ -115,13 +115,13 @@ public class PlayerController : MonoBehaviour {
         CanMove = true;
     }
 
-<<<<<<< HEAD
     IEnumerator WaitForRotation(int direction)
     {
         yield return new WaitForSeconds(0.5f);
 
         OneRoom.GetComponent<OneRoomController>().OneRoomRotation(direction);
-=======
+    }
+
     private static PlayerController s_Instance = null;
 
     // This defines a static instance property that attempts to find the manager object in the scene and
@@ -147,6 +147,5 @@ public class PlayerController : MonoBehaviour {
 
             return s_Instance;
         }
->>>>>>> 0914ba615314c0bf39b536b36d3d23a98a5c450b
     }
 }

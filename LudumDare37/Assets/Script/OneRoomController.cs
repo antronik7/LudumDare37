@@ -26,7 +26,7 @@ public class OneRoomController : MonoBehaviour {
     void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
         step = speed * Time.deltaTime;
-        offset = transform.position - spawn.transform.position;
+        
     }
 	
 	// Update is called once per frame
@@ -156,6 +156,9 @@ public class OneRoomController : MonoBehaviour {
     public void OneRoomTranslation(Vector3 position)
     {
         Rewinder.addTranslation(position, gameObject.transform.position);
+
+        offset = transform.position - spawn.transform.position;
+
         target = position + offset;
 
         DoTranslation = true;

@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     public float m_speed;
     public float j_force;
     public bool IsGround = false;
+    GameObject LaCamera;
     public BoxCollider2D boxCollider;
     
 
@@ -18,6 +19,8 @@ public class PlayerController : MonoBehaviour {
     public Transform hook = null;
 
 	private float baseGravityScale;
+    private int actionPlayer;
+    private int directionRotation;
 
 	private Animator animManager;
 
@@ -31,6 +34,7 @@ public class PlayerController : MonoBehaviour {
 		baseGravityScale = rBody.gravityScale;
         boxCollider = GetComponent<BoxCollider2D>();
 		OneRoom = GameObject.FindGameObjectWithTag ("Room");
+        LaCamera = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
 	void Update () {
@@ -100,6 +104,7 @@ public class PlayerController : MonoBehaviour {
             {
                 if(RessourceManager.instance.NbrTranslation > 0)
                 {
+                    actionPlayer = 1;
                     RessourceManager.instance.NbrTranslation--;
 
                     AudioController.instance.playClip(2);
@@ -109,7 +114,9 @@ public class PlayerController : MonoBehaviour {
                     rBody.velocity = new Vector2(0, 0);
                     CanMove = false;
 
-                    OneRoom.GetComponent<OneRoomController>().OneRoomTranslation(transform.position);
+                    LaCamera.GetComponent<CameraController>().faitDezoom = true;
+
+                    //OneRoom.GetComponent<OneRoomController>().OneRoomTranslation(transform.position);
                 }
             }
 
@@ -117,6 +124,8 @@ public class PlayerController : MonoBehaviour {
             {
                 if(RessourceManager.instance.NbrRotation > 0)
                 {
+                    actionPlayer = 2;
+
                     RessourceManager.instance.NbrRotation--;
 
                     AudioController.instance.playClip(4);
@@ -135,6 +144,8 @@ public class PlayerController : MonoBehaviour {
             {
                 if(RessourceManager.instance.NbrRotation > 0)
                 {
+                    actionPlayer = 2;
+
                     RessourceManager.instance.NbrRotation--;
 
                     AudioController.instance.playClip(4);
@@ -153,6 +164,8 @@ public class PlayerController : MonoBehaviour {
             {
                 if(RessourceManager.instance.NbrSymetrie > 0)
                 {
+                    actionPlayer = 3;
+
                     RessourceManager.instance.NbrSymetrie--;
 
                     AudioController.instance.playClip(6);
@@ -167,7 +180,9 @@ public class PlayerController : MonoBehaviour {
 
                     transform.parent = OneRoom.transform;
 
-                    OneRoom.GetComponent<OneRoomController>().OneRoomSymetrie();
+                    LaCamera.GetComponent<CameraController>().faitDezoom = true;
+
+                    //OneRoom.GetComponent<OneRoomController>().OneRoomSymetrie();
                 }
             }
 
@@ -204,6 +219,16 @@ public class PlayerController : MonoBehaviour {
         rBody.velocity = new Vector2(0, 0);
         rBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         CanMove = true;
+
+        if(actionPlayer != 1)
+        {
+            LaCamera.GetComponent<CameraController>().faitZoom = true;
+        }
+        else
+        {
+            LaCamera.GetComponent<CameraController>().faitZoomTrans = true;
+        }
+        
     }
 
     public bool canIMove()
@@ -215,7 +240,11 @@ public class PlayerController : MonoBehaviour {
     {
         yield return new WaitForSeconds(0.5f);
 
-        OneRoom.GetComponent<OneRoomController>().OneRoomRotation(direction);
+        directionRotation = direction;
+
+        LaCamera.GetComponent<CameraController>().faitDezoom = true;
+
+        //OneRoom.GetComponent<OneRoomController>().OneRoomRotation(direction);
     }
 
     private static PlayerController s_Instance = null;
@@ -243,5 +272,20 @@ public class PlayerController : MonoBehaviour {
 
             return s_Instance;
         }
+    }
+
+    public int getActionPlayer()
+    {
+        return actionPlayer;
+    }
+
+    public int getDirection()
+    {
+        return directionRotation;
+    }
+
+    public Vector3 getPosition()
+    {
+        return transform.position;
     }
 }

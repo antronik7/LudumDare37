@@ -184,6 +184,11 @@ public class PlayerController : MonoBehaviour {
             {
                 CameraController.instance.resetCamera();
             }
+
+            if (Input.GetButtonDown("Pause"))
+            {
+                pauseInterface.instance.swapMenuPanel();
+            }
     }
 
 

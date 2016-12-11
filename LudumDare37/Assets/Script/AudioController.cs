@@ -59,7 +59,6 @@ public class AudioController : MonoBehaviour {
                 GameObject obj = Instantiate(Resources.Load("AudioController") as GameObject);
                 s_Instance = obj.GetComponent<AudioController>();
             }
-
             return s_Instance;
         }
     }

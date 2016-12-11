@@ -77,55 +77,74 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetButtonDown("Translation"))
             {
-                GetComponent<AudioSource>().PlayOneShot(translationSound, 1f);
+                if(RessourceManager.instance.NbrTranslation > 0)
+                {
+                    RessourceManager.instance.NbrTranslation--;
 
-                boxCollider.enabled = false;
-                rBody.gravityScale = 0;
-                rBody.velocity = new Vector2(0, 0);
-                CanMove = false;
+                    GetComponent<AudioSource>().PlayOneShot(translationSound, 1f);
 
-                OneRoom.GetComponent<OneRoomController>().OneRoomTranslation(transform.position);
+                    boxCollider.enabled = false;
+                    rBody.gravityScale = 0;
+                    rBody.velocity = new Vector2(0, 0);
+                    CanMove = false;
+
+                    OneRoom.GetComponent<OneRoomController>().OneRoomTranslation(transform.position);
+                }
             }
 
             if (Input.GetAxis("RotGauche") > 0.1)
             {
-                GetComponent<AudioSource>().PlayOneShot(rotationSound, 1f);
+                if(RessourceManager.instance.NbrRotation > 0)
+                {
+                    RessourceManager.instance.NbrRotation--;
 
-                boxCollider.enabled = false;
-                rBody.gravityScale = 0;
-                rBody.velocity = new Vector2(0, 0);
-                CanMove = false;
-                rBody.constraints = RigidbodyConstraints2D.None;
+                    GetComponent<AudioSource>().PlayOneShot(rotationSound, 1f);
 
-                StartCoroutine(WaitForRotation(1));
+                    boxCollider.enabled = false;
+                    rBody.gravityScale = 0;
+                    rBody.velocity = new Vector2(0, 0);
+                    CanMove = false;
+                    rBody.constraints = RigidbodyConstraints2D.None;
+
+                    StartCoroutine(WaitForRotation(1));
+                }
             }
 
 			if (Input.GetAxis("RotDroite") > 0.1)
             {
-                GetComponent<AudioSource>().PlayOneShot(rotationSound, 1f);
+                if(RessourceManager.instance.NbrRotation > 0)
+                {
+                    RessourceManager.instance.NbrRotation--;
 
-                boxCollider.enabled = false;
-                rBody.gravityScale = 0;
-                rBody.velocity = new Vector2(0, 0);
-                CanMove = false;
-                rBody.constraints = RigidbodyConstraints2D.None;
-                StartCoroutine(WaitForRotation(-1));
+                    GetComponent<AudioSource>().PlayOneShot(rotationSound, 1f);
+
+                    boxCollider.enabled = false;
+                    rBody.gravityScale = 0;
+                    rBody.velocity = new Vector2(0, 0);
+                    CanMove = false;
+                    rBody.constraints = RigidbodyConstraints2D.None;
+                    StartCoroutine(WaitForRotation(-1));
+                }   
             }
 
             if (Input.GetButtonDown("Symetrie"))
             {
-                GetComponent<AudioSource>().PlayOneShot(symetrieSound, 1f);
+                if(RessourceManager.instance.NbrSymetrie > 0)
+                {
+                    RessourceManager.instance.NbrSymetrie--;
 
-                boxCollider.enabled = false;
-                rBody.gravityScale = 0;
-                rBody.velocity = new Vector2(0, 0);
-                CanMove = false;
+                    GetComponent<AudioSource>().PlayOneShot(symetrieSound, 1f);
 
-                transform.parent = OneRoom.transform;
+                    boxCollider.enabled = false;
+                    rBody.gravityScale = 0;
+                    rBody.velocity = new Vector2(0, 0);
+                    CanMove = false;
 
-                OneRoom.GetComponent<OneRoomController>().OneRoomSymetrie();
+                    transform.parent = OneRoom.transform;
+
+                    OneRoom.GetComponent<OneRoomController>().OneRoomSymetrie();
+                }
             }
-
 
             if (Input.GetButtonDown("Rewind"))
             {

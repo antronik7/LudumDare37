@@ -15,6 +15,7 @@ public class OneRoomController : MonoBehaviour {
     bool DoRotation = false;
     bool DoSymetrie = false;
     float angleInitial;
+    float angleInitialPlayer;
     float anglePrecedent;
     int direction;
     float transitionInitialDistancePlayerSpawn = 0;
@@ -96,7 +97,7 @@ public class OneRoomController : MonoBehaviour {
 
         if(DoRotation)
         {
-            player.transform.rotation = Quaternion.Euler(0, 0, 0);
+            player.transform.rotation = Quaternion.Euler(0, 0, angleInitialPlayer);
 
             if(player.GetComponent<PlayerController>().isHooked == false)
             {
@@ -157,6 +158,7 @@ public class OneRoomController : MonoBehaviour {
     public void OneRoomSymetrie()
     {
         Rewinder.addSymetrie(player.transform.position);
+
         if (transform.rotation.eulerAngles.z == 270 || transform.rotation.eulerAngles.z == 90)
         {
             ScaleTarget = (int)transform.localScale.y * -1;
@@ -165,7 +167,8 @@ public class OneRoomController : MonoBehaviour {
         {
             ScaleTarget = (int)transform.localScale.x * -1;
         }
-                DoSymetrie = true;
+
+        DoSymetrie = true;
     }
 
     public void OneRoomRotation(int dir)
@@ -188,6 +191,7 @@ public class OneRoomController : MonoBehaviour {
         DoRotation = true;
 
         angleInitial = (int)leTrucATourner.transform.rotation.eulerAngles.z;
+        angleInitialPlayer = (int)player.transform.rotation.eulerAngles.z;
 
         if (direction == -1 && (int)angleInitial == 0)
         {
@@ -272,7 +276,7 @@ public class OneRoomController : MonoBehaviour {
 
         leTrucATourner.transform.rotation = Quaternion.Euler(0, 0, angleInitial + (90 * direction));
 
-        player.transform.rotation = Quaternion.Euler(0, 0, 0);
+        player.transform.rotation = Quaternion.Euler(0, 0, angleInitialPlayer);
 
         player.GetComponent<PlayerController>().resetPhysic();
 

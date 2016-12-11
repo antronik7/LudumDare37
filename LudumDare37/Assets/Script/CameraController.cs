@@ -22,9 +22,9 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        //transform.position = new Vector3(OneRoom.transform.position.x, OneRoom.transform.position.y, transform.position.z);
+        transform.position = new Vector3(OneRoom.transform.position.x, OneRoom.transform.position.y, transform.position.z);
 
-        if (roomController.getIsTranslating())
+        /*if (roomController.getIsTranslating())
         {
 
             if (init < 2)
@@ -40,7 +40,7 @@ public class CameraController : MonoBehaviour
                 GetComponent<Camera>().orthographicSize -= 0.02f;
             }
 
-        }
+        }*/
         /*
         else if (GetComponent<Camera>().orthographicSize > normalSizeRoom)
         {
@@ -48,6 +48,7 @@ public class CameraController : MonoBehaviour
         }*/
     }
     bool isMaxSize = false;
+
     public void unzoomCamera()
     {
         if (!isMaxSize)

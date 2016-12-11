@@ -149,7 +149,7 @@ public class OneRoomController : MonoBehaviour {
 
         offset = transform.position - spawn.transform.position;
 
-        target = position + offset;
+        target = new Vector3(position.x, position.y, 0) + offset;
 
         DoTranslation = true;
     }

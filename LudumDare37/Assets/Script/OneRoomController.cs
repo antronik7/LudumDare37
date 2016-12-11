@@ -137,6 +137,8 @@ public class OneRoomController : MonoBehaviour {
 
     public void OneRoomRotation(int dir)
     {
+        Rewinder.addRotation(player.transform.position, dir);
+
         GetComponent<Rigidbody2D>().angularVelocity = speedRotation * dir;
         //player.GetComponent<Rigidbody2D>().angularVelocity = (speedRotation * 100) * dir * -1;
 

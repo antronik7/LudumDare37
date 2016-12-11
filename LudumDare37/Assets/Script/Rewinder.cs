@@ -21,11 +21,11 @@ public class Rewinder : MonoBehaviour {
     {
         listState.Push(new RewindInfo(playerPos, 0, roomPos));
     }
-    static void addRotation(Vector3 playerPos, int dir)
+    public static void addRotation(Vector3 playerPos, int dir)
     {
         listState.Push(new RewindInfo(playerPos, 1, dir));
     }
-    static void addMiror(Vector3 playerPos)
+    public static void addMiror(Vector3 playerPos)
     {
         listState.Push(new RewindInfo(playerPos, 2));
     }

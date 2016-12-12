@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
     private int init;
     private float initDistance;
 
-
+    public bool inactive;
 
 
     //variable pour translation
@@ -46,6 +46,10 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        if (inactive)
+        {
+            return;
+        }
         if(faitZoom)
         {
             

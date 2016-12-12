@@ -21,3 +21,26 @@ C:\Users\Florian\Documents\Projets\Unity\LudumDare37\LudumDare37\Temp\bin\Debug\
 C:\Users\Florian\Documents\Projets\Unity\LudumDare37\LudumDare37\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 C:\Users\Florian\Documents\Projets\Unity\LudumDare37\LudumDare37\obj\Debug\Assembly-CSharp.dll
 C:\Users\Florian\Documents\Projets\Unity\LudumDare37\LudumDare37\obj\Debug\Assembly-CSharp.pdb
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\Assembly-CSharp.dll
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\UnityEditor.dll
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\UnityEngine.Analytics.dll
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\UnityEngine.dll
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\UnityEngine.Networking.dll
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\UnityEngine.UI.dll
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\Mono.Cecil.dll
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\Unity.SerializationLogic.dll
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\Unity.DataContract.dll
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\Unity.UNetWeaver.dll
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\Unity.CecilTools.dll
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\UnityEngine.xml
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\UnityEditor.xml
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\UnityEngine.UI.xml
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\UnityEngine.Networking.xml
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\Temp\bin\Debug\UnityEngine.Analytics.xml
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\obj\Debug\Assembly-CSharp.dll
+C:\Users\essia\Documents\Steing\Projets Jeux Video\FafaStudio\Ludum Dare 37\Unity\LudumDare37\obj\Debug\Assembly-CSharp.pdb

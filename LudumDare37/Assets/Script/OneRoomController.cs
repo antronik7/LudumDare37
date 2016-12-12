@@ -21,6 +21,7 @@ public class OneRoomController : MonoBehaviour {
     float transitionInitialDistancePlayerSpawn = 0;
     float ScaleTarget;
     GameObject leTrucATourner;
+    GameObject laCamera;
 
     float step;
     Vector3 target;
@@ -29,6 +30,7 @@ public class OneRoomController : MonoBehaviour {
     void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
         step = speed * Time.deltaTime;
+        laCamera = GameObject.FindGameObjectWithTag("MainCamera");
         //spawn = (FindObjectOfType(typeof(SpawnController)) as SpawnController).gameObject;
     }
 	
@@ -46,7 +48,12 @@ public class OneRoomController : MonoBehaviour {
             {
                 DoTranslation = false;
 
+
+                laCamera.GetComponent<CameraController>().distanceEntreCameraEtRoom = Vector2.Distance(laCamera.transform.position, transform.position);
+
                 player.GetComponent<PlayerController>().resetPhysic();
+
+                
             }
         }
 
@@ -85,10 +92,12 @@ public class OneRoomController : MonoBehaviour {
                 if (Mathf.Abs(transform.localScale.x) > Mathf.Abs(ScaleTarget))
                 {
                     DoSymetrie = false;
-                    Debug.Log(ScaleTarget);
+
                     transform.localScale = new Vector3(ScaleTarget, transform.localScale.y, transform.localScale.z);
                     player.transform.parent = null;
                     player.GetComponent<PlayerController>().resetPhysic();
+
+                    
                 }
             }
             

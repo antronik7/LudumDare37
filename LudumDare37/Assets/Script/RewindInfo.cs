@@ -10,18 +10,19 @@ public class RewindInfo
     int dir;
     Vector3 cameraPos;
 
-
+    bool isGround;
     bool gotKey;
     bool gotStar;
-    public RewindInfo(Vector3 playerPos, int type, Vector3 cameraPos)
+    public RewindInfo(Vector3 playerPos, int type, Vector3 cameraPos, bool isGround)
     {
         this.playerPos = playerPos;
         this.type = type;
         this.cameraPos = cameraPos;
         this.gotKey = false;
         this.gotStar = false;
+        this.isGround = isGround;
     }
-    public RewindInfo(Vector3 playerPos, int type, Vector3 roomPos, Vector3 cameraPos)
+    public RewindInfo(Vector3 playerPos, int type, Vector3 roomPos, Vector3 cameraPos, bool isGround)
     {
         this.playerPos = playerPos;
         this.type = type;
@@ -29,8 +30,9 @@ public class RewindInfo
         this.cameraPos = cameraPos;
         this.gotKey = false;
         this.gotStar = false;
+        this.isGround = isGround;
     }
-    public RewindInfo(Vector3 playerPos, int type, int dir, Vector3 cameraPos)
+    public RewindInfo(Vector3 playerPos, int type, int dir, Vector3 cameraPos, bool isGround)
     {
         this.playerPos = playerPos;
         this.type = type;
@@ -38,6 +40,7 @@ public class RewindInfo
         this.cameraPos = cameraPos;
         this.gotKey = false;
         this.gotStar = false;
+        this.isGround = isGround;
     }
 
     public void rewind()
@@ -69,6 +72,7 @@ public class RewindInfo
             default:
                 break;
         }
+        PlayerController.instance.IsGround = this.isGround;
         CameraController.instance.transform.position = cameraPos;
         resetKey();
         //resetStar();

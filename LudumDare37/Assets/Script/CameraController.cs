@@ -146,7 +146,7 @@ public class CameraController : MonoBehaviour
     {
         if (!isMaxSize)
         {
-            GetComponent<Camera>().orthographicSize = GetComponent<Camera>().orthographicSize + 5 * Time.deltaTime;
+            GetComponent<Camera>().orthographicSize = GetComponent<Camera>().orthographicSize + 8 * Time.deltaTime;
             Vector3 screenPoint = GetComponent<Camera>().WorldToViewportPoint(ExitController.instance.transform.position);
             bool onScreen = screenPoint.z > 0 && screenPoint.x > 0.1 && screenPoint.x < 0.9 && screenPoint.y > 0.1 && screenPoint.y < 0.9;
             if (onScreen)
@@ -186,7 +186,7 @@ public class CameraController : MonoBehaviour
         {
             if (gameObject.GetComponent<Camera>().orthographicSize > normalSizeRoom)
             {
-                GetComponent<Camera>().orthographicSize = GetComponent<Camera>().orthographicSize - 5 * Time.deltaTime;
+                GetComponent<Camera>().orthographicSize = GetComponent<Camera>().orthographicSize - 8 * Time.deltaTime;
             }
             isMaxSize = false;
         }

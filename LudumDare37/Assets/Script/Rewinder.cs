@@ -16,27 +16,26 @@ public class Rewinder : MonoBehaviour {
         keyLockController = KeyLockController.instance;
         starController = StarController.instance;
     }
-
-    public static void addTranslation(Vector3 playerPos, Vector3 roomPos, Vector3 cameraPos)
+    public static void addTranslation(Vector3 playerPos, Vector3 roomPos, Vector3 cameraPos, bool isGround)
     {
         Scorer.instance.addScoreValue(2, 1);
-        listState.Push(new RewindInfo(playerPos, 0, roomPos, cameraPos));
+        listState.Push(new RewindInfo(playerPos, 0, roomPos, cameraPos, isGround));
     }
-    public static void addRotation(Vector3 playerPos, int dir, Vector3 cameraPos)
+    public static void addRotation(Vector3 playerPos, int dir, Vector3 cameraPos, bool isGround)
     {
         Scorer.instance.addScoreValue(2, 1);
-        listState.Push(new RewindInfo(playerPos, 1, dir, cameraPos));
+        listState.Push(new RewindInfo(playerPos, 1, dir, cameraPos, isGround));
     }
-    public static void addSymetrie(Vector3 playerPos, Vector3 cameraPos)
+    public static void addSymetrie(Vector3 playerPos, Vector3 cameraPos, bool isGround)
     {
         Scorer.instance.addScoreValue(2, 1);
-        listState.Push(new RewindInfo(playerPos, 2, cameraPos));
+        listState.Push(new RewindInfo(playerPos, 2, cameraPos, isGround));
     }
+    
 
-
-    public static void addSpawn(Vector3 playerPos, Vector3 cameraPos)
+    public static void addSpawn(Vector3 playerPos, Vector3 cameraPos, bool isGround)
     {
-        listState.Push(new RewindInfo(playerPos, 3, cameraPos));
+        listState.Push(new RewindInfo(playerPos, 3, cameraPos, isGround));
     }
 
     public static void gotKey()

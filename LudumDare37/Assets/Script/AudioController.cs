@@ -4,7 +4,9 @@ using System.Collections.Generic;
 
 public class AudioController : MonoBehaviour {
     public List<AudioClip> audioList;
+    public List<float> audioListVolume;
     public List<AudioClip> audioListMusic;
+    public List<float> audioListMusicVolume;
     AudioSource[] sources;
     public bool juanTest;
 
@@ -29,13 +31,14 @@ public class AudioController : MonoBehaviour {
         }
         if (!sources[1].isPlaying)
         {
-            sources[1].PlayOneShot(audioListMusic[Random.Range(0, 8)], 1f);
+            int nextSong = Random.Range(0, 8);
+            sources[1].PlayOneShot(audioListMusic[nextSong], audioListMusicVolume[nextSong]);
         }
     }
 
     public void playClip(int audioIndex)
     {
-        sources[0].PlayOneShot(audioList[audioIndex], 1f);
+        sources[0].PlayOneShot(audioList[audioIndex], audioListVolume[audioIndex]);
     }
 
  

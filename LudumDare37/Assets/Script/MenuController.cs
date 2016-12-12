@@ -10,4 +10,11 @@ public class MenuController : MonoBehaviour {
 
         }
     }
+
+
+    public void goToMainMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    }
+
 }

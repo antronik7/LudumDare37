@@ -36,11 +36,18 @@ public class MenuButtonController : MonoBehaviour
     }
     public void loadLevel()
     {
+        valid();
         UnityEngine.SceneManagement.SceneManager.LoadScene("Level" + level);
+    }
+
+    public void valid()
+    {
+        AudioController.instance.playClip(15);
     }
 
     public void onSelect()
     {
+        AudioController.instance.playClip(14);
         if(level < 6)
         {
             transform.parent.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 1f;

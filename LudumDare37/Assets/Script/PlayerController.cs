@@ -121,6 +121,7 @@ public class PlayerController : MonoBehaviour {
             {
                 if(RessourceManager.instance.NbrTranslation > 0)
                 {
+                    transform.parent = null;
                     actionPlayer = 1;
                     RessourceManager.instance.NbrTranslation--;
 
@@ -143,6 +144,7 @@ public class PlayerController : MonoBehaviour {
             {
                 if(RessourceManager.instance.NbrRotation > 0)
                 {
+                    transform.parent = null;
                     actionPlayer = 2;
 
                     RessourceManager.instance.NbrRotation--;
@@ -163,6 +165,7 @@ public class PlayerController : MonoBehaviour {
             {
                 if(RessourceManager.instance.NbrRotation > 0)
                 {
+                    transform.parent = null;
                     actionPlayer = 2;
 
                     RessourceManager.instance.NbrRotation--;

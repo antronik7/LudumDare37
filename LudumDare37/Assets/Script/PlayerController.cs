@@ -25,8 +25,12 @@ public class PlayerController : MonoBehaviour {
 	private Animator animManager;
 
 	private bool isSymetrie=false;
+	public GameObject particles;
 
-	public bool test;
+	private GameObject fadeInstance;
+	private GameObject test;
+
+
 
     void Start () {
 		animManager = GetComponent<Animator> ();
@@ -35,6 +39,8 @@ public class PlayerController : MonoBehaviour {
         boxCollider = GetComponent<BoxCollider2D>();
 		OneRoom = GameObject.FindGameObjectWithTag ("Room");
         LaCamera = GameObject.FindGameObjectWithTag("MainCamera");
+
+		fadeInstance = Instantiate(Resources.Load ("FadeEffect"), transform,false)as GameObject;
     }
 
 	void Update () {
@@ -74,26 +80,30 @@ public class PlayerController : MonoBehaviour {
 					animManager.SetBool ("isWalking", false);
 				} else {
 					if (move < 0) {
-						if(!isSymetrie)
+						if (!isSymetrie) {
 							GetComponent<SpriteRenderer> ().flipX = true;
-						else
+							particles.transform.localScale = new Vector3 (-1f, 1f, 1f);
+						} else {
 							GetComponent<SpriteRenderer> ().flipX = false;
+							particles.transform.localScale = new Vector3 (1f, 1f, 1f);
+						}
 					} else {
-						if(!isSymetrie)
+						if (!isSymetrie) {
 							GetComponent<SpriteRenderer> ().flipX = false;
-						else
+							particles.transform.localScale = new Vector3 (1f, 1f, 1f);
+						} else {
 							GetComponent<SpriteRenderer> ().flipX = true;
+							particles.transform.localScale = new Vector3 (-1f, 1f, 1f);
+						}
 					}
-					animManager.SetBool ("isWalking", true);
+					if((!animManager.GetBool("isJumping"))||(!animManager.GetBool("isFalling")))
+						animManager.SetBool ("isWalking", true);
 				}
                 rBody.velocity = new Vector2(move * m_speed, rBody.velocity.y);
             }
             
             if (IsGround)
             {
-
-				animManager.SetBool ("isFalling", false);
-				animManager.SetBool ("isJumping", false);
 
                 if (Input.GetButtonDown("Jump"))
                 {
@@ -144,7 +154,7 @@ public class PlayerController : MonoBehaviour {
                 }
             }
 
-			if ((Input.GetAxis("RotDroite") > 0.1)||(test))
+			if (Input.GetAxis("RotDroite") > 0.1)
             {
                 if(RessourceManager.instance.NbrRotation > 0)
                 {
@@ -161,7 +171,6 @@ public class PlayerController : MonoBehaviour {
                     rBody.constraints = RigidbodyConstraints2D.None;
                     StartCoroutine(WaitForRotation(-1));
                 }   
-				test=false;
             }
 
             if (Input.GetButtonDown("Symetrie"))
@@ -192,6 +201,7 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetButtonDown("Rewind"))
             {
+				fadeInstance.GetComponent<FadeEffect> ().startFadeInOut (Color.white, 0.5f);
                 Rewinder.rewind();
             }
             }

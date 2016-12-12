@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/LevelHugo.unity
-=======
-- path: Assets/Scenes/Level9.unity
->>>>>>> 246764426ca1368ec5435291b13a942ab52a9914
+- path: Assets/Scenes/Menu.unity
   isLoaded: 1
   isActive: 1

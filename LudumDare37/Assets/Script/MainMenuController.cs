@@ -22,13 +22,19 @@ public class MainMenuController : MonoBehaviour {
 
         if (actualLevel != 0)
         {
-            startGameButton.GetComponentInChildren<Text>().text = "Continue to play";
+            startGameButton.GetComponentInChildren<Text>().text = "Continue";
         }
     }
+
+
 
     public void closeGame()
     {
         Application.Quit();
+    }
+    public void changeController(float value)
+    {
+        Scorer.instance.setScore("controllerChoice", value);
     }
 
     public void goToMenu()

@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour {
 
 		fadeInstance = Instantiate(Resources.Load ("FadeEffect"), transform,false)as GameObject;
 		actionParticleEffect.SetActive (false);
-        Rewinder.addSpawn(transform.position, CameraController.instance.transform.position);
+        Rewinder.addSpawn(transform.position, CameraController.instance.transform.position, PlayerController.instance.IsGround);
     }
 
 	void Update () {

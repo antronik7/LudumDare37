@@ -9,7 +9,6 @@ public class RessourceManager : MonoBehaviour {
 
     public static RessourceManager instance = null;
  
-    // Use this for initialization
     void Awake () {
 
         //Check if instance already exists
@@ -23,9 +22,5 @@ public class RessourceManager : MonoBehaviour {
             Destroy(gameObject);
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }

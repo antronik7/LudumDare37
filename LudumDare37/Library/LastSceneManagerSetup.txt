@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/Level8.unity
+=======
+- path: Assets/Scenes/LevelHugo.unity
+>>>>>>> ccb7c0457ed7f4e9db3611981185f13b7115af86
   isLoaded: 1
   isActive: 1

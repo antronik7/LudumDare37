@@ -12,6 +12,8 @@ public class AudioController : MonoBehaviour {
     AudioSource[] sources;
     public bool juanTest;
 
+	private int nextSong = 0;
+
     void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
@@ -31,7 +33,7 @@ public class AudioController : MonoBehaviour {
             }
             else
             {
-                if (sources[1].volume < 1)
+				if (sources[1].volume < audioListMusicVolume[nextSong])
                 {
                     sources[1].volume += Time.deltaTime * 2f;
                 }
@@ -39,7 +41,9 @@ public class AudioController : MonoBehaviour {
         }
         if (!sources[1].isPlaying)
         {
-            int nextSong = Random.Range(0, 8);
+            nextSong = Random.Range(0, 8);
+			print (audioListMusic [nextSong]);
+			print (nextSong);
             sources[1].PlayOneShot(audioListMusic[nextSong], audioListMusicVolume[nextSong]);
         }
     }
@@ -55,10 +59,6 @@ public class AudioController : MonoBehaviour {
             sources[2].PlayOneShot(audioList[audioIndex], audioListVolume[audioIndex]);
         }
     }
-
-
-
- 
 
 
     private static AudioController s_Instance = null;

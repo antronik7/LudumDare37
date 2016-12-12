@@ -1,28 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/LevelAntoine2.unity
-=======
-<<<<<<< HEAD
-- path: Assets/Scenes/Niveaux Jean/TutorielTranslSimple.unity
-=======
-<<<<<<< HEAD
-- path: Assets/Scenes/LevelAntoine2.unity
-=======
-<<<<<<< HEAD
-- path: Assets/Scenes/Level1.unity
-=======
-<<<<<<< HEAD
-- path: Assets/Scenes/Level1.unity
-=======
-<<<<<<< HEAD
-- path: Assets/Scenes/Level1.unity
-=======
-- path: Assets/Scenes/Menu.unity
->>>>>>> 83f2531b443941f9af6c1a3f3c5edfe8b3399b4d
->>>>>>> d2a3a16bee769ba55b411a29fe01910f2dd35fc2
->>>>>>> cfbd6f6594fd4db1d6cd66567114bd358ed3f333
->>>>>>> 204ac050f1f544901fedaad4bd45227b9b6945bf
->>>>>>> eedfcaec5abcb5e344506066dfcffa9862f47f21
->>>>>>> fa335de6d6ea69bd499fcbae494dcfa26cc3763a
+- path: Assets/Scenes/LevelAntoine1.unity
   isLoaded: 1
   isActive: 1

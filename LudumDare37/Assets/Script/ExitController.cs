@@ -19,7 +19,7 @@ public class ExitController : MonoBehaviour {
 	
 	}
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         //print("TriggerEnter");
         //Si joueur :

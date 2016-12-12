@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour {
 	public GameObject particles;
 
 	private GameObject fadeInstance;
-	private GameObject test;
+
+	public GameObject actionParticleEffect;
 
 
 
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour {
         LaCamera = GameObject.FindGameObjectWithTag("MainCamera");
 
 		fadeInstance = Instantiate(Resources.Load ("FadeEffect"), transform,false)as GameObject;
+		actionParticleEffect.SetActive (false);
     }
 
 	void Update () {
@@ -120,6 +122,8 @@ public class PlayerController : MonoBehaviour {
                 {
                     actionPlayer = 1;
                     RessourceManager.instance.NbrTranslation--;
+
+					launchActionAnimation (2f);
 
                     AudioController.instance.playClip(2);
 
@@ -220,7 +224,18 @@ public class PlayerController : MonoBehaviour {
             }
     }
 
+	public void launchActionAnimation(float time){
+		StartCoroutine (actionAnimation (time));
+	}
 
+	IEnumerator actionAnimation(float time){
+		animManager.SetBool ("isActioning", true);
+		//actionParticleEffect.SetActive (true);
+		yield return new WaitForSeconds (time);
+		animManager.SetBool ("isActioning", false);
+		actionParticleEffect.SetActive (false);
+	}
+		
     public void moveTo(Vector3 playerPosition)
     {
         gameObject.transform.position = playerPosition;

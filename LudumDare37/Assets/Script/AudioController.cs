@@ -26,7 +26,7 @@ public class AudioController : MonoBehaviour {
     {
         if (!sources[1].isPlaying)
         {
-            sources[1].PlayOneShot(audioList[Random.Range(14, 20)], 1f);
+            sources[1].PlayOneShot(audioList[Random.Range(14, 22)], 1f);
         }
     }
 

@@ -135,6 +135,17 @@ public class Scorer : MonoBehaviour {
         addScoreValue(idScore, value);
     }
 
+    public void setScore(int idScore, float value)
+    {
+        scoresScriptableObject.scores[idScore].value = value;
+        PlayerPrefs.SetFloat("Score_id_" + idScore, value);
+    }
+    public void setScore(string scoreName, float value)
+    {
+        int idScore = scoresScriptableObject.scores.FindIndex(score => score.name == scoreName);
+        setScore(idScore, value);
+    }
+
     public float getScoreValue(int idScore)
     {
         return scoresScriptableObject.scores[idScore].value;

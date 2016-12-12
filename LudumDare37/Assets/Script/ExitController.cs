@@ -33,7 +33,7 @@ public class ExitController : MonoBehaviour {
             }
             else
             {
-                float levelNumber = float.Parse(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Substring(5, 1));
+                float levelNumber = float.Parse(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Substring(5));
                 Scorer.instance.addScoreValue(0, levelNumber);
 
                 LevelController.instance.setLevelScore();

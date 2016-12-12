@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class AudioController : MonoBehaviour {
     public List<AudioClip> audioList;
     public List<float> audioListVolume;
+    public List<bool> audioListMuteMusic;
+
     public List<AudioClip> audioListMusic;
     public List<float> audioListMusicVolume;
     AudioSource[] sources;
@@ -44,8 +46,17 @@ public class AudioController : MonoBehaviour {
 
     public void playClip(int audioIndex)
     {
-        sources[0].PlayOneShot(audioList[audioIndex], audioListVolume[audioIndex]);
+        if (audioListMuteMusic[audioIndex])
+        {
+            sources[0].PlayOneShot(audioList[audioIndex], audioListVolume[audioIndex]);
+        }
+        else
+        {
+            sources[2].PlayOneShot(audioList[audioIndex], audioListVolume[audioIndex]);
+        }
     }
+
+
 
  
 

@@ -18,7 +18,8 @@ public class TeleporteurController : MonoBehaviour {
 		} else if ((other.tag == "Player") && (!canTeleport))
         {
             AudioController.instance.playClip(9);
-            StartCoroutine(waitBeforeCanTeleport());
+            //StartCoroutine(waitBeforeCanTeleport());
+			canTeleport = true;
 		}
     }
 

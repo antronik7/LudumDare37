@@ -62,6 +62,10 @@ public class RewindInfo
                 PlayerController.instance.moveTo(this.playerPos);
                 AudioController.instance.playClip(7);
                 break;
+            case 3:
+                PlayerController.instance.moveTo(this.playerPos);
+                AudioController.instance.playClip(3);
+                break;
             default:
                 break;
         }

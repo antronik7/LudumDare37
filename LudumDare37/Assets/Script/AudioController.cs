@@ -22,11 +22,17 @@ public class AudioController : MonoBehaviour {
         {
             if (sources[0].isPlaying)
             {
-                sources[1].volume = 0f;
+                if(sources[1].volume > 0)
+                {
+                    sources[1].volume -= Time.deltaTime * 2f;
+                }
             }
             else
             {
-                sources[1].volume = 1f;
+                if (sources[1].volume < 1)
+                {
+                    sources[1].volume += Time.deltaTime * 2f;
+                }
             }
         }
         if (!sources[1].isPlaying)

@@ -33,6 +33,12 @@ public class Rewinder : MonoBehaviour {
         listState.Push(new RewindInfo(playerPos, 2, cameraPos));
     }
 
+
+    public static void addSpawn(Vector3 playerPos, Vector3 cameraPos)
+    {
+        listState.Push(new RewindInfo(playerPos, 3, cameraPos));
+    }
+
     public static void gotKey()
     {
         if(listState.Count != 0)
@@ -53,8 +59,15 @@ public class Rewinder : MonoBehaviour {
     {
         if(listState.Count != 0)
         {
-            Scorer.instance.addScoreValue(2, -1);
-            listState.Pop().rewind();
+            if(listState.Count == 1)
+            {
+                listState.Peek().rewind();
+            }
+            else
+            {
+                Scorer.instance.addScoreValue(2, -1);
+                listState.Pop().rewind();
+            }
         }
     }
 }

@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour {
 		if ((rBody.velocity.y < 0)&&(!IsGround)) {
 			animManager.SetBool ("isFalling", true);
 		} else if (IsGround) {
+            Debug.Log("Je suis ground");
 			animManager.SetBool ("isFalling", false);
 			animManager.SetBool ("isJumping", false);
 		}
@@ -113,6 +114,7 @@ public class PlayerController : MonoBehaviour {
                     AudioController.instance.playClip(0);
                     rBody.velocity = new Vector2(rBody.velocity.x, j_force);
 					animManager.SetBool ("isJumping", true);
+                    Debug.Log("Jai sauter");
                     IsGround = false;
                 }
             }

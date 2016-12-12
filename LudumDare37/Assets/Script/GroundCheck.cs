@@ -15,7 +15,7 @@ public class GroundCheck : MonoBehaviour {
 	    
 	}
 
-    void OnTriggerStay2D(Collider2D other)
+    /*void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "ground" || other.gameObject.tag == "movingPlatform")
         {
@@ -25,7 +25,7 @@ public class GroundCheck : MonoBehaviour {
             }
             parent.IsGround = true;
         }
-    }
+    }*/
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -40,6 +40,15 @@ public class GroundCheck : MonoBehaviour {
             {
                 parent.transform.parent = other.transform;
             }
+        }
+
+        if (other.gameObject.tag == "ground" || other.gameObject.tag == "movingPlatform")
+        {
+            if (!parent.IsGround)
+            {
+                //AudioController.instance.playClip(1);fout la merde
+            }
+            parent.IsGround = true;
         }
     }
 

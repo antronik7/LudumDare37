@@ -154,7 +154,7 @@ public class OneRoomController : MonoBehaviour {
 
     public void OneRoomTranslation(Vector3 position)
     {
-        Rewinder.addTranslation(position, gameObject.transform.position);
+        Rewinder.addTranslation(position, gameObject.transform.position, CameraController.instance.transform.position);
 
         offset = transform.position - spawn.transform.position;
 
@@ -165,7 +165,7 @@ public class OneRoomController : MonoBehaviour {
 
     public void OneRoomSymetrie()
     {
-        Rewinder.addSymetrie(player.transform.position);
+        Rewinder.addSymetrie(player.transform.position, CameraController.instance.transform.position);
 
         if (transform.rotation.eulerAngles.z == 270 || transform.rotation.eulerAngles.z == 90)
         {
@@ -181,7 +181,7 @@ public class OneRoomController : MonoBehaviour {
 
     public void OneRoomRotation(int dir)
     {
-        Rewinder.addRotation(player.transform.position, dir);
+        Rewinder.addRotation(player.transform.position, dir, CameraController.instance.transform.position);
 
         if(player.GetComponent<PlayerController>().isHooked)
         {

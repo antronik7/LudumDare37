@@ -17,20 +17,20 @@ public class Rewinder : MonoBehaviour {
         starController = StarController.instance;
     }
 
-    public static void addTranslation(Vector3 playerPos, Vector3 roomPos)
+    public static void addTranslation(Vector3 playerPos, Vector3 roomPos, Vector3 cameraPos)
     {
         Scorer.instance.addScoreValue(2, 1);
-        listState.Push(new RewindInfo(playerPos, 0, roomPos));
+        listState.Push(new RewindInfo(playerPos, 0, roomPos, cameraPos));
     }
-    public static void addRotation(Vector3 playerPos, int dir)
+    public static void addRotation(Vector3 playerPos, int dir, Vector3 cameraPos)
     {
         Scorer.instance.addScoreValue(2, 1);
-        listState.Push(new RewindInfo(playerPos, 1, dir));
+        listState.Push(new RewindInfo(playerPos, 1, dir, cameraPos));
     }
-    public static void addSymetrie(Vector3 playerPos)
+    public static void addSymetrie(Vector3 playerPos, Vector3 cameraPos)
     {
         Scorer.instance.addScoreValue(2, 1);
-        listState.Push(new RewindInfo(playerPos, 2));
+        listState.Push(new RewindInfo(playerPos, 2, cameraPos));
     }
 
     public static void gotKey()

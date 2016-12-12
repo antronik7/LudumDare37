@@ -3,18 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class AudioController : MonoBehaviour {
-    /*
-    public AudioClip jumpSound;
-    public AudioClip translationSound;
-    public AudioClip rotationSound;
-    public AudioClip symetrieSound;
-
-    public AudioClip rewindTranslationSound;
-    public AudioClip rewindRotationSound;
-    public AudioClip rewindSymetrieSound;*/
-
     public List<AudioClip> audioList;
+    public List<AudioClip> audioListMusic;
     AudioSource[] sources;
+    public bool juanTest;
 
     void Awake()
     {
@@ -24,9 +16,20 @@ public class AudioController : MonoBehaviour {
 
     void Update()
     {
+        if (juanTest)
+        {
+            if (sources[0].isPlaying)
+            {
+                sources[1].volume = 0f;
+            }
+            else
+            {
+                sources[1].volume = 1f;
+            }
+        }
         if (!sources[1].isPlaying)
         {
-            sources[1].PlayOneShot(audioList[Random.Range(14, 22)], 1f);
+            sources[1].PlayOneShot(audioListMusic[Random.Range(0, 8)], 1f);
         }
     }
 

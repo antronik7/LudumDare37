@@ -1,5 +1,8 @@
 sceneSetups:
 <<<<<<< HEAD
+- path: Assets/Scenes/LevelAntoine2.unity
+=======
+<<<<<<< HEAD
 - path: Assets/Scenes/Niveaux Jean/TutorielTranslSimple.unity
 =======
 <<<<<<< HEAD
@@ -20,5 +23,6 @@ sceneSetups:
 >>>>>>> cfbd6f6594fd4db1d6cd66567114bd358ed3f333
 >>>>>>> 204ac050f1f544901fedaad4bd45227b9b6945bf
 >>>>>>> eedfcaec5abcb5e344506066dfcffa9862f47f21
+>>>>>>> fa335de6d6ea69bd499fcbae494dcfa26cc3763a
   isLoaded: 1
   isActive: 1

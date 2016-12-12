@@ -19,18 +19,20 @@ public class MenuButtonController : MonoBehaviour
         }
         else
         {
+            Color yellow;
+            ColorUtility.TryParseHtmlString("#C9D311FF", out yellow);
             float scoreValue = Scorer.instance.getScoreValue("Level" + level);
             if (scoreValue>0)
             {
-                transform.Find("FirstStar").GetComponent<Image>().color = Color.yellow;
+                transform.Find("FirstStar").GetComponent<Image>().color = yellow;
             }
             if (scoreValue == 2 || scoreValue == 4)
             {
-                transform.Find("SecondStar").GetComponent<Image>().color = Color.yellow;
+                transform.Find("SecondStar").GetComponent<Image>().color = yellow;
             }
             if (scoreValue >= 3 )
             {
-                transform.Find("ThirdStar").GetComponent<Image>().color = Color.yellow;
+                transform.Find("ThirdStar").GetComponent<Image>().color = yellow;
             }
         }
     }

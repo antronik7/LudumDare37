@@ -91,6 +91,10 @@ public class PlayerController : MonoBehaviour {
             
             if (IsGround)
             {
+
+				animManager.SetBool ("isFalling", false);
+				animManager.SetBool ("isJumping", false);
+
                 if (Input.GetButtonDown("Jump"))
                 {
                     AudioController.instance.playClip(0);

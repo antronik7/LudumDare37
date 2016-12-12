@@ -158,7 +158,7 @@ public class CameraController : MonoBehaviour
                 }
                 if (onScreen)
                 {
-                    if (StarController.instance == null)
+                    if (KeyLockController.instance == null)
                     {
                         onScreen = true;
                     }

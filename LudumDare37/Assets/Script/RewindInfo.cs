@@ -71,7 +71,7 @@ public class RewindInfo
         }
         CameraController.instance.transform.position = cameraPos;
         resetKey();
-        resetStar();
+        //resetStar();
     }
 
     public void setKey()

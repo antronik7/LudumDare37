@@ -27,12 +27,19 @@ public class ExitController : MonoBehaviour {
 			return;
         if(other.tag == "Player")
         {
-            float levelNumber = float.Parse(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Substring(5, 1));
-            Scorer.instance.addScoreValue(0, levelNumber);
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Introduction")
+            {
+                SceneManager.LoadScene(levelName, LoadSceneMode.Single);
+            }
+            else
+            {
+                float levelNumber = float.Parse(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Substring(5, 1));
+                Scorer.instance.addScoreValue(0, levelNumber);
 
-            LevelController.instance.setLevelScore();
-            AudioController.instance.playClip(13);
-            StartCoroutine(LoadLevelCoroutine());
+                LevelController.instance.setLevelScore();
+                AudioController.instance.playClip(13);
+                StartCoroutine(LoadLevelCoroutine());
+            }
         }
     }
 

@@ -3,18 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class AudioController : MonoBehaviour {
-    /*
-    public AudioClip jumpSound;
-    public AudioClip translationSound;
-    public AudioClip rotationSound;
-    public AudioClip symetrieSound;
-
-    public AudioClip rewindTranslationSound;
-    public AudioClip rewindRotationSound;
-    public AudioClip rewindSymetrieSound;*/
-
     public List<AudioClip> audioList;
+    public List<float> audioListVolume;
+    public List<bool> audioListMuteMusic;
+
+    public List<AudioClip> audioListMusic;
+    public List<float> audioListMusicVolume;
     AudioSource[] sources;
+    public bool juanTest;
 
     void Awake()
     {
@@ -24,16 +20,43 @@ public class AudioController : MonoBehaviour {
 
     void Update()
     {
+        if (juanTest)
+        {
+            if (sources[0].isPlaying)
+            {
+                if(sources[1].volume > 0)
+                {
+                    sources[1].volume -= Time.deltaTime * 2f;
+                }
+            }
+            else
+            {
+                if (sources[1].volume < 1)
+                {
+                    sources[1].volume += Time.deltaTime * 2f;
+                }
+            }
+        }
         if (!sources[1].isPlaying)
         {
-            sources[1].PlayOneShot(audioList[Random.Range(14, 20)], 1f);
+            int nextSong = Random.Range(0, 8);
+            sources[1].PlayOneShot(audioListMusic[nextSong], audioListMusicVolume[nextSong]);
         }
     }
 
     public void playClip(int audioIndex)
     {
-        sources[0].PlayOneShot(audioList[audioIndex], 1f);
+        if (audioListMuteMusic[audioIndex])
+        {
+            sources[0].PlayOneShot(audioList[audioIndex], audioListVolume[audioIndex]);
+        }
+        else
+        {
+            sources[2].PlayOneShot(audioList[audioIndex], audioListVolume[audioIndex]);
+        }
     }
+
+
 
  
 

@@ -8,29 +8,34 @@ public class RewindInfo
     int type;//0 translate; 1 rotate; 2 symetri
     Vector3 roomPos;
     int dir;
+    Vector3 cameraPos;
+
 
     bool gotKey;
     bool gotStar;
-    public RewindInfo(Vector3 playerPos, int type)
+    public RewindInfo(Vector3 playerPos, int type, Vector3 cameraPos)
     {
         this.playerPos = playerPos;
         this.type = type;
+        this.cameraPos = cameraPos;
         this.gotKey = false;
         this.gotStar = false;
     }
-    public RewindInfo(Vector3 playerPos, int type, Vector3 roomPos)
+    public RewindInfo(Vector3 playerPos, int type, Vector3 roomPos, Vector3 cameraPos)
     {
         this.playerPos = playerPos;
         this.type = type;
         this.roomPos = roomPos;
+        this.cameraPos = cameraPos;
         this.gotKey = false;
         this.gotStar = false;
     }
-    public RewindInfo(Vector3 playerPos, int type, int dir)
+    public RewindInfo(Vector3 playerPos, int type, int dir, Vector3 cameraPos)
     {
         this.playerPos = playerPos;
         this.type = type;
         this.dir = dir;
+        this.cameraPos = cameraPos;
         this.gotKey = false;
         this.gotStar = false;
     }
@@ -57,9 +62,14 @@ public class RewindInfo
                 PlayerController.instance.moveTo(this.playerPos);
                 AudioController.instance.playClip(7);
                 break;
+            case 3:
+                PlayerController.instance.moveTo(this.playerPos);
+                AudioController.instance.playClip(3);
+                break;
             default:
                 break;
         }
+        CameraController.instance.transform.position = cameraPos;
         resetKey();
         resetStar();
     }

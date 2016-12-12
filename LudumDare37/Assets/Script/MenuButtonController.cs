@@ -12,7 +12,7 @@ public class MenuButtonController : MonoBehaviour
 
 	// Use this for initialization
 	void Awake () {
-        transform.Find("levelButtonText").GetComponent<Text>().text = "Level " + level;
+        transform.Find("levelButtonText").GetComponent<Text>().text = level.ToString();
         if (Scorer.instance.getScoreValue(0) < level-1)
         {
             GetComponent<Button>().interactable = false;
@@ -36,11 +36,18 @@ public class MenuButtonController : MonoBehaviour
     }
     public void loadLevel()
     {
+        valid();
         UnityEngine.SceneManagement.SceneManager.LoadScene("Level" + level);
+    }
+
+    public void valid()
+    {
+        AudioController.instance.playClip(15);
     }
 
     public void onSelect()
     {
+        AudioController.instance.playClip(14);
         if(level < 6)
         {
             transform.parent.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 1f;

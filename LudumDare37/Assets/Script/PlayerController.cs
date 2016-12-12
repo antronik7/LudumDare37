@@ -25,8 +25,13 @@ public class PlayerController : MonoBehaviour {
 	private Animator animManager;
 
 	private bool isSymetrie=false;
+	public GameObject particles;
 
-	public bool test;
+	private GameObject fadeInstance;
+
+	public GameObject actionParticleEffect;
+
+
 
     void Start () {
 		animManager = GetComponent<Animator> ();
@@ -35,6 +40,10 @@ public class PlayerController : MonoBehaviour {
         boxCollider = GetComponent<BoxCollider2D>();
 		OneRoom = GameObject.FindGameObjectWithTag ("Room");
         LaCamera = GameObject.FindGameObjectWithTag("MainCamera");
+
+		fadeInstance = Instantiate(Resources.Load ("FadeEffect"), transform,false)as GameObject;
+		actionParticleEffect.SetActive (false);
+        Rewinder.addSpawn(transform.position, CameraController.instance.transform.position);
     }
 
 	void Update () {
@@ -74,23 +83,31 @@ public class PlayerController : MonoBehaviour {
 					animManager.SetBool ("isWalking", false);
 				} else {
 					if (move < 0) {
-						if(!isSymetrie)
+						if (!isSymetrie) {
 							GetComponent<SpriteRenderer> ().flipX = true;
-						else
+							particles.transform.localScale = new Vector3 (-1f, 1f, 1f);
+						} else {
 							GetComponent<SpriteRenderer> ().flipX = false;
+							particles.transform.localScale = new Vector3 (1f, 1f, 1f);
+						}
 					} else {
-						if(!isSymetrie)
+						if (!isSymetrie) {
 							GetComponent<SpriteRenderer> ().flipX = false;
-						else
+							particles.transform.localScale = new Vector3 (1f, 1f, 1f);
+						} else {
 							GetComponent<SpriteRenderer> ().flipX = true;
+							particles.transform.localScale = new Vector3 (-1f, 1f, 1f);
+						}
 					}
-					animManager.SetBool ("isWalking", true);
+					if((!animManager.GetBool("isJumping"))||(!animManager.GetBool("isFalling")))
+						animManager.SetBool ("isWalking", true);
 				}
                 rBody.velocity = new Vector2(move * m_speed, rBody.velocity.y);
             }
             
             if (IsGround)
             {
+
                 if (Input.GetButtonDown("Jump"))
                 {
                     AudioController.instance.playClip(0);
@@ -106,6 +123,8 @@ public class PlayerController : MonoBehaviour {
                 {
                     actionPlayer = 1;
                     RessourceManager.instance.NbrTranslation--;
+
+					launchActionAnimation (2f);
 
                     AudioController.instance.playClip(2);
 
@@ -140,7 +159,7 @@ public class PlayerController : MonoBehaviour {
                 }
             }
 
-			if ((Input.GetAxis("RotDroite") > 0.1)||(test))
+			if (Input.GetAxis("RotDroite") > 0.1)
             {
                 if(RessourceManager.instance.NbrRotation > 0)
                 {
@@ -157,7 +176,6 @@ public class PlayerController : MonoBehaviour {
                     rBody.constraints = RigidbodyConstraints2D.None;
                     StartCoroutine(WaitForRotation(-1));
                 }   
-				test=false;
             }
 
             if (Input.GetButtonDown("Symetrie"))
@@ -188,6 +206,7 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetButtonDown("Rewind"))
             {
+				fadeInstance.GetComponent<FadeEffect> ().startFadeInOut (Color.white, 0.5f);
                 Rewinder.rewind();
             }
             }
@@ -206,7 +225,18 @@ public class PlayerController : MonoBehaviour {
             }
     }
 
+	public void launchActionAnimation(float time){
+		StartCoroutine (actionAnimation (time));
+	}
 
+	IEnumerator actionAnimation(float time){
+		animManager.SetBool ("isActioning", true);
+		//actionParticleEffect.SetActive (true);
+		yield return new WaitForSeconds (time);
+		animManager.SetBool ("isActioning", false);
+		actionParticleEffect.SetActive (false);
+	}
+		
     public void moveTo(Vector3 playerPosition)
     {
         gameObject.transform.position = playerPosition;

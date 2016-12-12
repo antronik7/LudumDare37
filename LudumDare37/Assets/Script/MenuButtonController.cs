@@ -15,7 +15,6 @@ public class MenuButtonController : MonoBehaviour
         transform.Find("levelButtonText").GetComponent<Text>().text = level.ToString();
         if (Scorer.instance.getScoreValue(0) < level-1)
         {
-            Debug.Log(level);
             GetComponent<Button>().interactable = false;
         }
         else

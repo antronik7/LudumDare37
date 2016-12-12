@@ -12,7 +12,7 @@ public class MenuButtonController : MonoBehaviour
 
 	// Use this for initialization
 	void Awake () {
-        transform.Find("levelButtonText").GetComponent<Text>().text = "Level " + level;
+        transform.Find("levelButtonText").GetComponent<Text>().text = level.ToString();
         if (Scorer.instance.getScoreValue(0) < level-1)
         {
             GetComponent<Button>().interactable = false;

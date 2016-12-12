@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class MainMenuController : MonoBehaviour {
 
     public GameObject startGameButton;
+    public GameObject playKeyboardButton;
+    public GameObject playControllerButton;
     float actualLevel;
 
     void Start()
@@ -24,6 +26,7 @@ public class MainMenuController : MonoBehaviour {
         {
             startGameButton.GetComponentInChildren<Text>().text = "Continue";
         }
+        selectColor();
     }
 
 
@@ -35,6 +38,29 @@ public class MainMenuController : MonoBehaviour {
     public void changeController(float value)
     {
         Scorer.instance.setScore("controllerChoice", value);
+        selectColor();
+    }
+
+    private void selectColor()
+    {
+        if (Scorer.instance.getScoreValue("controllerChoice") == 0)
+        {
+            Color color;
+            ColorUtility.TryParseHtmlString("#4E4A4AFF", out color);
+            playKeyboardButton.GetComponent<Image>().color = color;
+
+            ColorUtility.TryParseHtmlString("#FFFFFFFF", out color);
+            playControllerButton.GetComponent<Image>().color = color;
+        }
+        else
+        {
+            Color color;
+            ColorUtility.TryParseHtmlString("#FFFFFFFF", out color);
+            playKeyboardButton.GetComponent<Image>().color = color;
+
+            ColorUtility.TryParseHtmlString("#4E4A4AFF", out color);
+            playControllerButton.GetComponent<Image>().color = color;
+        }
     }
 
     public void goToMenu()

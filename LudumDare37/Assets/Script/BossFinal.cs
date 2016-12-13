@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class BossFinal : MonoBehaviour {
 
-	private GameObject player;
+	public GameObject player;
 	public float moveSpeed;
 
 	void Start () {
@@ -11,9 +12,15 @@ public class BossFinal : MonoBehaviour {
 	}
 
 	void Update () {
-		transform.position = Vector3.MoveTowards(player.transform.position, transform.position, Time.deltaTime * moveSpeed);
-		Vector3 test = new Vector3 (transform.position.x, transform.position.y, 0f);
-		transform.position = test;
+		Vector3 newPosition = new Vector3 (player.transform.position.x - 22f, player.transform.position.y, 0F);
+		transform.position = Vector3.MoveTowards(transform.position, newPosition, Time.deltaTime * moveSpeed);
 		
+	}
+
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.tag == "Player") {
+			SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+		}
 	}
 }

@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/Introduction.unity
+=======
+- path: Assets/Scenes/SplashScreenFafaStudio.unity
+>>>>>>> bc5a5d29079f2c5270b6a8e7a4b1d7d20fe9453f
   isLoaded: 1
   isActive: 1

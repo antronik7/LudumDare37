@@ -60,9 +60,13 @@ public class MenuButtonController : MonoBehaviour
         {
             transform.parent.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 1f;
         }
-        if (level > 10)
+        if (level > 10 && level < 16)
         {
-            transform.parent.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 0.6f;
+            transform.parent.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 0.75f;
+        }
+        if (level > 15 && level < 21)
+        {
+            transform.parent.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 0.25f;
         }
     }
 

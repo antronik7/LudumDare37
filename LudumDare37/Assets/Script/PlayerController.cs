@@ -215,8 +215,10 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetButtonDown("Rewind"))
             {
+
 				fadeInstance.GetComponent<FadeEffect> ().startFadeInOut (Color.white, 0.5f);
                 Rewinder.rewind();
+                StartCoroutine(waitPlz());
             }
             }
             if (Input.GetButton("UnzoomCamera"))
@@ -245,7 +247,17 @@ public class PlayerController : MonoBehaviour {
 		animManager.SetBool ("isActioning", false);
 		actionParticleEffect.SetActive (false);
 	}
-		
+
+    IEnumerator waitPlz()
+    {
+        yield return new WaitForSeconds(0.1f);
+        
+        if(transform.parent == null && rBody.velocity.y >= 0)
+        {
+            IsGround = true;
+        }
+    }
+
     public void moveTo(Vector3 playerPosition)
     {
         gameObject.transform.position = playerPosition;

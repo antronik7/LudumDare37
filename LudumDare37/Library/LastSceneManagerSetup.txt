@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/LevelfinalHugo.unity
+=======
+- path: Assets/Scenes/Level25.unity
+>>>>>>> df3aff69fb02d875bb3e78235a633911d882f8d9
   isLoaded: 1
   isActive: 1

@@ -22,6 +22,12 @@ public class MenuButtonController : MonoBehaviour
             Color yellow;
             ColorUtility.TryParseHtmlString("#C9D311FF", out yellow);
             float scoreValue = Scorer.instance.getScoreValue("Level" + level);
+            if (scoreValue >= 2)
+            {
+                transform.Find("SecondStar").GetComponent<Image>().color = yellow;
+            }
+
+            /*
             if (scoreValue>0)
             {
                 transform.Find("FirstStar").GetComponent<Image>().color = yellow;
@@ -33,7 +39,7 @@ public class MenuButtonController : MonoBehaviour
             if (scoreValue >= 3 )
             {
                 transform.Find("ThirdStar").GetComponent<Image>().color = yellow;
-            }
+            }*/
         }
     }
     public void loadLevel()
@@ -54,9 +60,13 @@ public class MenuButtonController : MonoBehaviour
         {
             transform.parent.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 1f;
         }
-        if (level > 10)
+        if (level > 10 && level < 16)
         {
-            transform.parent.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 0.6f;
+            transform.parent.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 0.75f;
+        }
+        if (level > 15 && level < 21)
+        {
+            transform.parent.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 0.25f;
         }
     }
 

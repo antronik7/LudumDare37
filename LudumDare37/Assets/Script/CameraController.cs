@@ -101,8 +101,6 @@ public class CameraController : MonoBehaviour
 
             float pourcentage = (distanceEntreCameraEtRoom - Vector2.Distance(transform.position, OneRoom.transform.position)) / distanceEntreCameraEtRoom;
 
-            Debug.Log(pourcentage);
-
             GetComponent<Camera>().orthographicSize = ((normalSizeRoom + distanceDezoomAction) - ((distanceDezoomAction) * pourcentage));
 
             if(transform.position == new Vector3(OneRoom.transform.position.x, OneRoom.transform.position.y, -10f))

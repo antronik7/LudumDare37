@@ -10,14 +10,15 @@ public class LevelController : MonoBehaviour {
     public void setLevelScore()
     {
         float levelScore = 1;
-        if (StarController.instance == null)
+        if (StarController.instance == null || !StarController.instance.isActiveAndEnabled)
         {
             levelScore++;
         }
+        /*
         if (Scorer.instance.getScoreValue("actionsNumber") <= minimumNecessaryAction)
         {
             levelScore += 2;
-        }
+        }*/
         Scorer.instance.addScoreValue(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, levelScore);
 
         /*

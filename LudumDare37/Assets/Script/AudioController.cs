@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class AudioController : MonoBehaviour {
     public List<AudioClip> audioList;
@@ -39,13 +40,18 @@ public class AudioController : MonoBehaviour {
                 }
             }
         }
-        if (!sources[1].isPlaying)
-        {
-            nextSong = Random.Range(0, 8);
-			print (audioListMusic [nextSong]);
-			print (nextSong);
-            sources[1].PlayOneShot(audioListMusic[nextSong], audioListMusicVolume[nextSong]);
-        }
+		if (UnityEngine.SceneManagement.SceneManager.GetActiveScene ().name != "Level26") {
+			if (!sources [1].isPlaying) {
+				nextSong = Random.Range (0, 8);
+				print (audioListMusic [nextSong]);
+				print (nextSong);
+				sources [1].PlayOneShot (audioListMusic [nextSong], audioListMusicVolume [nextSong]);
+			}
+		} else {
+			if (!sources [1].isPlaying) {
+				sources [1].PlayOneShot (audioListMusic [8],audioListMusicVolume [8]);
+			}
+		}
     }
 
     public void playClip(int audioIndex)

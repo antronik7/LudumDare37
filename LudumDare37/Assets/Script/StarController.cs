@@ -3,9 +3,14 @@ using System.Collections;
 
 public class StarController : MonoBehaviour {
 
+	private GameObject particleAfterAction;
+
     void Start()
     {
+		particleAfterAction = transform.parent.GetComponentInChildren<ParticleSystem> ().gameObject;
+		particleAfterAction.SetActive (false);
     }
+
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -13,6 +18,7 @@ public class StarController : MonoBehaviour {
         {
             AudioController.instance.playClip(11);
             Rewinder.gotStar();
+			particleAfterAction.SetActive (true);
             this.gameObject.SetActive(false);
         }
     }
